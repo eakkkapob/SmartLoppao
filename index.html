@@ -2016,7 +2016,142 @@
         align-items: stretch;
       }
     }
-  </style>
+  
+    /* ============================================================= */
+    /* ICON PICKER & CATEGORY STYLES                                 */
+    /* ============================================================= */
+    .icon-picker-container {
+      background: var(--bg-surface-subtle);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 12px;
+      margin-top: 4px;
+    }
+    .icon-picker-selected-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+    .icon-picker-preview {
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-md);
+      background: var(--primary-color);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      flex-shrink: 0;
+    }
+    .icon-picker-preview i, .icon-picker-preview svg {
+      width: 22px;
+      height: 22px;
+    }
+    .icon-picker-selected-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .icon-picker-selected-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+    .icon-picker-hint {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-left: auto;
+    }
+    .icon-grid-selector {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+      gap: 6px;
+      max-height: 190px;
+      overflow-y: auto;
+      padding: 6px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+    }
+    .icon-grid-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 4px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid transparent;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      color: var(--text-main);
+      background: transparent;
+      user-select: none;
+    }
+    .icon-grid-item:hover {
+      background: var(--bg-surface-subtle);
+      border-color: var(--border-color);
+      transform: translateY(-2px);
+    }
+    .icon-grid-item.active {
+      background: rgba(2, 132, 199, 0.12);
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+    .icon-grid-item i, .icon-grid-item svg {
+      width: 20px;
+      height: 20px;
+      margin-bottom: 4px;
+      pointer-events: none;
+    }
+    .icon-grid-item span {
+      font-size: 10px;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 100%;
+      pointer-events: none;
+    }
+
+    /* Category Section Headers on Dashboard */
+    .dashboard-category-group {
+      margin-bottom: 28px;
+    }
+    .category-section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1.5px solid var(--border-color);
+    }
+    .category-section-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .category-section-title i, .category-section-title svg {
+      width: 18px;
+      height: 18px;
+      color: var(--primary-color);
+    }
+    .category-section-badge {
+      font-size: 12px;
+      font-weight: 600;
+      background: rgba(2, 132, 199, 0.1);
+      color: var(--primary-color);
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+    }
+
+</style>
 </head>
 <body>
 
@@ -2248,6 +2383,10 @@
                 <i data-lucide="layout-list" style="width: 16px; height: 16px;"></i>
                 <span>จัดการแอปพลิเคชัน</span>
               </button>
+              <button class="admin-tab-btn" data-tab="tab-categories">
+                <i data-lucide="folder-tree" style="width: 16px; height: 16px;"></i>
+                <span>จัดการหมวดหมู่</span>
+              </button>
               <button class="admin-tab-btn" data-tab="tab-settings">
                 <i data-lucide="palette" style="width: 16px; height: 16px;"></i>
                 <span>ตั้งค่าระบบ & สี</span>
@@ -2289,6 +2428,42 @@
                       </tr>
                     </thead>
                     <tbody id="admin-apps-tbody"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab: Category Management -->
+            <div class="admin-tab-content" id="tab-categories">
+              <div class="admin-card">
+                <div class="admin-card-header">
+                  <div>
+                    <div class="admin-card-title">จัดการหมวดหมู่ระบบงาน</div>
+                    <p style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">ปรับเปลี่ยนชื่อหมวดหมู่ เพิ่มหมวดใหม่ หรือจัดระเบียบ (เมื่อแก้ไขชื่อ ระบบจะอัปเดตระบบงานในหมวดนั้นให้อัตโนมัติ)</p>
+                  </div>
+                </div>
+
+                <form id="form-add-category" style="display: flex; gap: 8px; margin: 16px 0;">
+                  <input type="text" id="input-new-category-name" class="form-input" placeholder="พิมพ์ชื่อหมวดหมู่ใหม่ เช่น งานสารบรรณและธุรการ, กองช่าง..." required style="flex: 1;">
+                  <button type="submit" class="btn btn-primary" style="white-space: nowrap;">
+                    <i data-lucide="plus" style="width: 15px; height: 15px;"></i>
+                    <span>เพิ่มหมวดหมู่</span>
+                  </button>
+                </form>
+
+                <div class="table-responsive">
+                  <table class="app-table" id="admin-categories-table">
+                    <thead>
+                      <tr>
+                        <th style="width: 50px;">ลำดับ</th>
+                        <th>ชื่อหมวดหมู่</th>
+                        <th style="width: 140px; text-align: center;">จำนวนระบบงาน</th>
+                        <th style="width: 180px; text-align: right;">การจัดการ</th>
+                      </tr>
+                    </thead>
+                    <tbody id="admin-categories-tbody">
+                      <!-- Rendered by JS -->
+                    </tbody>
                   </table>
                 </div>
               </div>
@@ -2578,15 +2753,38 @@ function sendToPortal(action, payload) {
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="app-form-category">หมวดหมู่ระบบ *</label>
-              <input type="text" id="app-form-category" class="form-input" list="category-datalist" placeholder="เลือกหรือพิมพ์หมวดใหม่" required>
-              <datalist id="category-datalist"></datalist>
+              <label class="form-label" for="app-form-category-select">หมวดหมู่ระบบ *</label>
+              <div style="display: flex; gap: 8px;">
+                <select id="app-form-category-select" class="form-select" style="flex: 1;" required></select>
+                <button type="button" class="btn btn-secondary" id="btn-toggle-custom-cat" title="พิมพ์หมวดใหม่" style="white-space: nowrap; font-size: 12px; padding: 0 10px;">
+                  <i data-lucide="plus" style="width: 13px; height: 13px;"></i>
+                  <span>+ หมวดใหม่</span>
+                </button>
+              </div>
+              <input type="text" id="app-form-category-custom" class="form-input" placeholder="พิมพ์ชื่อหมวดหมู่ใหม่ที่นี่..." style="display: none; margin-top: 6px;">
             </div>
 
-            <div class="form-group">
-              <label class="form-label" for="app-form-icon">ไอคอน (Lucide Icon Name)</label>
-              <input type="text" id="app-form-icon" class="form-input" placeholder="เช่น calendar, file-text, laptop" value="layout-grid">
-              <span class="form-help">ดูชื่อไอคอนได้ที่ lucide.dev/icons</span>
+            <div class="form-group full-width">
+              <label class="form-label" style="display: flex; justify-content: space-between; align-items: center;">
+                <span>เลือกไอคอนระบบงาน *</span>
+                <span style="font-size: 11.5px; font-weight: normal; color: var(--text-muted);">คลิกเลือกไอคอนแนะนำด้านล่าง หรือพิมพ์ชื่อ</span>
+              </label>
+              <div class="icon-picker-container">
+                <div class="icon-picker-selected-box">
+                  <div class="icon-picker-preview" id="icon-picker-preview-box">
+                    <i data-lucide="calendar" id="icon-preview-display"></i>
+                  </div>
+                  <div class="icon-picker-selected-info">
+                    <span class="icon-picker-selected-label">ไอคอน:</span>
+                    <input type="text" id="app-form-icon" class="form-input" style="width: 160px; height: 34px; font-family: monospace; font-size: 13px;" value="calendar" required>
+                  </div>
+                  <div class="icon-picker-hint" id="icon-picker-hint-text">💡 เปลี่ยนตามการพิมพ์หรือคลิกเลือก</div>
+                </div>
+
+                <div class="icon-grid-selector" id="icon-grid-selector">
+                  <!-- Populated by JS -->
+                </div>
+              </div>
             </div>
 
             <div class="form-group">
@@ -2673,6 +2871,59 @@ function sendToPortal(action, payload) {
         return DEFAULT_LOPPAO_LOGO_BASE64;
       }
       return val;
+    }
+
+    
+    // =============================================================
+    // ICON PICKER & SMART SUGGESTION ENGINE
+    // =============================================================
+    const POPULAR_ICONS = [
+      { name: 'calendar', label: 'จอง/ปฏิทิน' },
+      { name: 'megaphone', label: 'ประกาศ/ข่าว' },
+      { name: 'file-check-2', label: 'คำสั่ง/อนุมัติ' },
+      { name: 'file-text', label: 'เอกสาร/หนังสือ' },
+      { name: 'map', label: 'แผนที่/GIS' },
+      { name: 'package', label: 'ครุภัณฑ์/พัสดุ' },
+      { name: 'shopping-cart', label: 'จัดซื้อจัดจ้าง' },
+      { name: 'laptop', label: 'IT/คอมพิวเตอร์' },
+      { name: 'users', label: 'บุคคล/บุคลากร' },
+      { name: 'bar-chart-3', label: 'รายงาน/สถิติ' },
+      { name: 'coins', label: 'การเงิน/บัญชี' },
+      { name: 'heart-handshake', label: 'บริการประชาชน' },
+      { name: 'building-2', label: 'อาคาร/สถานที่' },
+      { name: 'clipboard-list', label: 'แบบฟอร์ม/ตรวจ' },
+      { name: 'folder', label: 'แฟ้มงาน' },
+      { name: 'mail', label: 'สารบรรณ/จดหมาย' },
+      { name: 'shield-check', label: 'ความปลอดภัย' },
+      { name: 'bell', label: 'แจ้งเตือน' },
+      { name: 'globe', label: 'เว็บไซต์/พอร์ทัล' },
+      { name: 'car', label: 'ยานพาหนะ' },
+      { name: 'printer', label: 'งานพิมพ์' },
+      { name: 'wrench', label: 'ซ่อมบำรุง' },
+      { name: 'scale', label: 'นิติการ/กฎหมาย' },
+      { name: 'archive', label: 'คลังจัดเก็บ' },
+      { name: 'bookmark', label: 'บันทึกข้อมูล' },
+      { name: 'help-circle', label: 'ช่วยเหลือ' },
+      { name: 'smartphone', label: 'แอปมือถือ' },
+      { name: 'layout-grid', label: 'ทั่วไป' }
+    ];
+
+    function getSuggestedIcon(name) {
+      const n = (name || '').toLowerCase();
+      if (n.includes('จอง') || n.includes('ห้องประชุม') || n.includes('เวลา') || n.includes('ปฏิทิน') || n.includes('นัด')) return 'calendar';
+      if (n.includes('ประกาศ') || n.includes('ข่าว') || n.includes('แจ้งเตือน') || n.includes('ประชาสัมพันธ์')) return 'megaphone';
+      if (n.includes('คำสั่ง') || n.includes('ระเบียบ') || n.includes('มติ') || n.includes('อนุมัติ')) return 'file-check-2';
+      if (n.includes('gis') || n.includes('แผนที่') || n.includes('พื้นที่') || n.includes('พิกัด') || n.includes('ภูมิศาสตร์')) return 'map';
+      if (n.includes('ครุภัณฑ์') || n.includes('พัสดุ') || n.includes('ทรัพย์สิน') || n.includes('อุปกรณ์') || n.includes('สต็อก')) return 'package';
+      if (n.includes('จัดซื้อ') || n.includes('จ้าง') || n.includes('เบิก') || n.includes('สั่งซื้อ')) return 'shopping-cart';
+      if (n.includes('it') || n.includes('คอม') || n.includes('ซ่อม') || n.includes('ระบบสารสนเทศ') || n.includes('เครือข่าย') || n.includes('เน็ต')) return 'laptop';
+      if (n.includes('ประชาชน') || n.includes('ร้องเรียน') || n.includes('บริการ') || n.includes('ช่วยเหลือ') || n.includes('ทุกข์')) return 'heart-handshake';
+      if (n.includes('เงิน') || n.includes('งบ') || n.includes('บัญชี') || n.includes('คลัง') || n.includes('เบิกจ่าย') || n.includes('รายได้')) return 'coins';
+      if (n.includes('บุคคล') || n.includes('คน') || n.includes('บุคลากร') || n.includes('เจ้าหน้าที่') || n.includes('สวัสดิการ') || n.includes('ลา')) return 'users';
+      if (n.includes('สารบรรณ') || n.includes('หนังสือ') || n.includes('จดหมาย') || n.includes('เอกสาร')) return 'file-text';
+      if (n.includes('สถิติ') || n.includes('รายงาน') || n.includes('dashboard') || n.includes('วิเคราะห์') || n.includes('ประเมิน')) return 'bar-chart-3';
+      if (n.includes('ยานพาหนะ') || n.includes('รถ') || n.includes('เดินทาง')) return 'car';
+      return null;
     }
 
     const DEFAULT_CONFIG = {
@@ -2812,6 +3063,18 @@ function sendToPortal(action, payload) {
       // อัปเกรดอัตโนมัติให้ชี้ไปยัง Cloud Sync URL ของ GAS ทันที
       if (!appConfig.cloudSyncUrl || appConfig.cloudSyncUrl === "") {
         appConfig.cloudSyncUrl = "https://script.google.com/macros/s/AKfycbx5d1eWV9eBhG6HO8vyIf1YX30AsQlF5-8UzxcZY2RoXIZmo1HoRj9mEkbz29IIG4Ka/exec";
+      }
+
+      // ตรวจสอบและอัปเกรดไอคอนที่เป็น layout-grid หรือว่าง ให้เป็นไอคอนที่ตรงกับชื่อระบบงานอัตโนมัติ
+      if (Array.isArray(appConfig.apps)) {
+        appConfig.apps.forEach(app => {
+          if (!app.icon || app.icon === 'layout-grid') {
+            const suggested = getSuggestedIcon(app.name);
+            if (suggested) {
+              app.icon = suggested;
+            }
+          }
+        });
       }
 
       if (appConfig.adminPasswordHash === "ac9689e2272427085e35b9d3e3e8bed88cb3434828b43b86fc0596cad4c6e270") {
@@ -3175,6 +3438,7 @@ function sendToPortal(action, payload) {
       setProgressBar(false);
 
       renderAdminAppsTable();
+      renderCategoriesManager();
       populateAdminSettings();
       renderJsonPreview();
     }
@@ -3510,50 +3774,127 @@ function sendToPortal(action, payload) {
         return;
       }
 
-      filtered.forEach(app => {
-        const isFav = favorites.includes(app.id);
-        const card = document.createElement('div');
-        card.className = 'app-card';
-        card.onclick = () => {
-          if (app.openMode === 'newtab') {
-            window.open(app.url, '_blank');
-          } else {
-            window.location.hash = `#/app/${app.id}`;
-          }
-        };
+      // จัดกลุ่มแสดงผลแยกตามหมวดหมู่เมื่อเลือกหมวด "ทั้งหมด"
+      if (activeCategoryFilter === 'all' && !filterFavoritesOnly) {
+        const catMap = new Map();
+        filtered.forEach(app => {
+          const c = app.category || 'ทั่วไป';
+          if (!catMap.has(c)) catMap.set(c, []);
+          catMap.get(c).push(app);
+        });
 
-        card.innerHTML = `
-          <div class="app-card-header">
-            <div class="app-card-icon-box">
-              <i data-lucide="${app.icon || 'layout-grid'}"></i>
+        catMap.forEach((appsInCat, catName) => {
+          const groupWrapper = document.createElement('div');
+          groupWrapper.className = 'dashboard-category-group';
+          groupWrapper.style.gridColumn = '1 / -1';
+          groupWrapper.style.marginBottom = '28px';
+
+          groupWrapper.innerHTML = `
+            <div class="category-section-header" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1.5px solid var(--border-color);">
+              <div class="category-section-title" style="display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 700; color: var(--text-main);">
+                <i data-lucide="folder" style="width: 18px; height: 18px; color: var(--primary-color);"></i>
+                <span>${catName}</span>
+              </div>
+              <span class="category-section-badge" style="font-size: 12px; font-weight: 600; background: rgba(2, 132, 199, 0.1); color: var(--primary-color); padding: 3px 10px; border-radius: 9999px;">
+                ${appsInCat.length} ระบบ
+              </span>
             </div>
-            <div class="app-card-badges">
-              ${app.badge ? `<span class="app-card-badge highlight">${app.badge}</span>` : ''}
-              <button class="app-card-fav-btn ${isFav ? 'active' : ''}" onclick="toggleFavorite('${app.id}', event)" title="ติดดาว">
-                <i data-lucide="star" style="width: 16px; height: 16px;"></i>
+            <div class="apps-grid apps-subgrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 20px; padding: 0;"></div>
+          `;
+
+          const subGrid = groupWrapper.querySelector('.apps-subgrid');
+          appsInCat.forEach(app => {
+            const isFav = favorites.includes(app.id);
+            const card = document.createElement('div');
+            card.className = 'app-card';
+            card.onclick = () => {
+              if (app.openMode === 'newtab') {
+                window.open(app.url, '_blank');
+              } else {
+                window.location.hash = `#/app/${app.id}`;
+              }
+            };
+            card.innerHTML = `
+              <div class="app-card-header">
+                <div class="app-card-icon-box">
+                  <i data-lucide="${app.icon || 'layout-grid'}"></i>
+                </div>
+                <div class="app-card-badges">
+                  ${app.badge ? `<span class="app-card-badge highlight">${app.badge}</span>` : ''}
+                  <button class="app-card-fav-btn ${isFav ? 'active' : ''}" onclick="toggleFavorite('${app.id}', event)" title="ติดดาว">
+                    <i data-lucide="star" style="width: 16px; height: 16px;"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="app-card-body">
+                <div class="app-card-category">${app.category}</div>
+                <h3 class="app-card-title">${app.name}</h3>
+                <p class="app-card-desc">${app.description || 'คลิกเพื่อเปิดใช้งานระบบงานผ่าน Smart loppao'}</p>
+              </div>
+
+              <div class="app-card-footer">
+                <div class="app-card-open-label">
+                  <span>${app.openMode === 'newtab' ? 'เปิดแท็บใหม่' : 'เข้าใช้งานระบบ'}</span>
+                  <i data-lucide="${app.openMode === 'newtab' ? 'external-link' : 'arrow-right'}" style="width: 14px; height: 14px;"></i>
+                </div>
+                <button class="app-card-ext-btn" title="เปิดในแท็บใหม่" onclick="event.stopPropagation(); window.open('${app.url}', '_blank');">
+                  <i data-lucide="external-link" style="width: 15px; height: 15px;"></i>
+                </button>
+              </div>
+            `;
+            subGrid.appendChild(card);
+          });
+
+          grid.appendChild(groupWrapper);
+        });
+      } else {
+        // เมื่อกรองเฉพาะหมวด หรือเฉพาะรายการโปรด ให้แสดงการ์ดตรงๆ
+        filtered.forEach(app => {
+          const isFav = favorites.includes(app.id);
+          const card = document.createElement('div');
+          card.className = 'app-card';
+          card.onclick = () => {
+            if (app.openMode === 'newtab') {
+              window.open(app.url, '_blank');
+            } else {
+              window.location.hash = `#/app/${app.id}`;
+            }
+          };
+
+          card.innerHTML = `
+            <div class="app-card-header">
+              <div class="app-card-icon-box">
+                <i data-lucide="${app.icon || 'layout-grid'}"></i>
+              </div>
+              <div class="app-card-badges">
+                ${app.badge ? `<span class="app-card-badge highlight">${app.badge}</span>` : ''}
+                <button class="app-card-fav-btn ${isFav ? 'active' : ''}" onclick="toggleFavorite('${app.id}', event)" title="ติดดาว">
+                  <i data-lucide="star" style="width: 16px; height: 16px;"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="app-card-body">
+              <div class="app-card-category">${app.category}</div>
+              <h3 class="app-card-title">${app.name}</h3>
+              <p class="app-card-desc">${app.description || 'คลิกเพื่อเปิดใช้งานระบบงานผ่าน Smart loppao'}</p>
+            </div>
+
+            <div class="app-card-footer">
+              <div class="app-card-open-label">
+                <span>${app.openMode === 'newtab' ? 'เปิดแท็บใหม่' : 'เข้าใช้งานระบบ'}</span>
+                <i data-lucide="${app.openMode === 'newtab' ? 'external-link' : 'arrow-right'}" style="width: 14px; height: 14px;"></i>
+              </div>
+              <button class="app-card-ext-btn" title="เปิดในแท็บใหม่" onclick="event.stopPropagation(); window.open('${app.url}', '_blank');">
+                <i data-lucide="external-link" style="width: 15px; height: 15px;"></i>
               </button>
             </div>
-          </div>
+          `;
 
-          <div class="app-card-body">
-            <div class="app-card-category">${app.category}</div>
-            <h3 class="app-card-title">${app.name}</h3>
-            <p class="app-card-desc">${app.description || 'คลิกเพื่อเปิดใช้งานระบบงานผ่าน Smart loppao'}</p>
-          </div>
-
-          <div class="app-card-footer">
-            <div class="app-card-open-label">
-              <span>${app.openMode === 'newtab' ? 'เปิดแท็บใหม่' : 'เข้าใช้งานระบบ'}</span>
-              <i data-lucide="${app.openMode === 'newtab' ? 'external-link' : 'arrow-right'}" style="width: 14px; height: 14px;"></i>
-            </div>
-            <button class="app-card-ext-btn" title="เปิดในแท็บใหม่" onclick="event.stopPropagation(); window.open('${app.url}', '_blank');">
-              <i data-lucide="external-link" style="width: 15px; height: 15px;"></i>
-            </button>
-          </div>
-        `;
-
-        grid.appendChild(card);
-      });
+          grid.appendChild(card);
+        });
+      }
 
       refreshLucideIcons();
     }
@@ -3720,6 +4061,161 @@ function sendToPortal(action, payload) {
       }
     }
 
+    
+    // =============================================================
+    // CATEGORY MANAGEMENT & ICON PICKER LOGIC
+    // =============================================================
+    function renderCategoriesManager() {
+      const tbody = document.getElementById('admin-categories-tbody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      const catCounts = {};
+      appConfig.apps.forEach(app => {
+        const c = app.category || 'ทั่วไป';
+        catCounts[c] = (catCounts[c] || 0) + 1;
+      });
+
+      const allCats = Array.from(new Set([...(appConfig.categories || []), ...Object.keys(catCounts)]));
+      appConfig.categories = allCats;
+
+      if (allCats.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 24px; color: var(--text-muted);">ยังไม่มีหมวดหมู่</td></tr>';
+        return;
+      }
+
+      allCats.forEach((cat, index) => {
+        const count = catCounts[cat] || 0;
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td style="text-align: center; color: var(--text-muted); font-size: 13px;">${index + 1}</td>
+          <td style="font-weight: 600; font-size: 14px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <i data-lucide="folder" style="width: 16px; height: 16px; color: var(--primary-color);"></i>
+              <span class="cat-display-name">${cat}</span>
+            </div>
+          </td>
+          <td style="text-align: center;">
+            <span class="app-card-badge" style="background: rgba(2, 132, 199, 0.1); color: var(--primary-color); padding: 4px 12px; font-size: 12px; font-weight: 600; border-radius: 9999px;">
+              ${count} ระบบ
+            </span>
+          </td>
+          <td style="text-align: right;">
+            <div style="display: inline-flex; gap: 6px;">
+              <button type="button" class="btn btn-secondary btn-sm" onclick="promptRenameCategory('${cat.replace(/'/g, "\\'")}')" title="แก้ไขชื่อหมวดหมู่">
+                <i data-lucide="edit-3" style="width: 13px; height: 13px;"></i>
+                <span>เปลี่ยนชื่อ</span>
+              </button>
+              <button type="button" class="btn btn-danger btn-sm" onclick="confirmDeleteCategory('${cat.replace(/'/g, "\\'")}', ${count})" title="ลบหมวดหมู่">
+                <i data-lucide="trash-2" style="width: 13px; height: 13px;"></i>
+                <span>ลบ</span>
+              </button>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      refreshLucideIcons();
+    }
+
+    function promptRenameCategory(oldName) {
+      const newName = prompt(`ระบุชื่อใหม่สำหรับหมวดหมู่ "${oldName}":`, oldName);
+      if (!newName || newName.trim() === '' || newName.trim() === oldName) return;
+      const trimmed = newName.trim();
+
+      const idx = appConfig.categories.indexOf(oldName);
+      if (idx !== -1) {
+        appConfig.categories[idx] = trimmed;
+      } else {
+        appConfig.categories.push(trimmed);
+      }
+
+      let countUpdated = 0;
+      appConfig.apps.forEach(app => {
+        if (app.category === oldName) {
+          app.category = trimmed;
+          countUpdated++;
+        }
+      });
+
+      saveConfig();
+      renderCategoriesManager();
+      renderAdminTable();
+      renderSidebar();
+      renderDashboard();
+      showToast(`เปลี่ยนชื่อหมวดหมู่เป็น "${trimmed}" เรียบร้อยแล้ว (อัปเดต ${countUpdated} ระบบ)`, 'success');
+    }
+
+    function confirmDeleteCategory(catName, count) {
+      if (count > 0) {
+        const proceed = confirm(`หมวดหมู่ "${catName}" มีระบบงานอยู่ ${count} ระบบ\nหากลบ ระบบงานเหล่านี้จะถูกย้ายไปที่หมวด "ทั่วไป"\n\nคุณแน่ใจหรือไม่ที่จะลบหมวดหมู่นี้?`);
+        if (!proceed) return;
+        appConfig.apps.forEach(app => {
+          if (app.category === catName) app.category = 'ทั่วไป';
+        });
+        if (!appConfig.categories.includes('ทั่วไป')) appConfig.categories.push('ทั่วไป');
+      } else {
+        if (!confirm(`ต้องการลบหมวดหมู่ "${catName}" ใช่หรือไม่?`)) return;
+      }
+
+      appConfig.categories = appConfig.categories.filter(c => c !== catName);
+      saveConfig();
+      renderCategoriesManager();
+      renderAdminTable();
+      renderSidebar();
+      renderDashboard();
+      showToast(`ลบหมวดหมู่ "${catName}" เรียบร้อยแล้ว`, 'success');
+    }
+
+    // Icon Picker Init & Select
+    function initIconPicker() {
+      const grid = document.getElementById('icon-grid-selector');
+      if (!grid) return;
+      grid.innerHTML = '';
+
+      POPULAR_ICONS.forEach(item => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'icon-grid-item';
+        btn.dataset.icon = item.name;
+        btn.title = item.label;
+        btn.innerHTML = `
+          <i data-lucide="${item.name}"></i>
+          <span>${item.label}</span>
+        `;
+        btn.onclick = () => selectIconInPicker(item.name);
+        grid.appendChild(btn);
+      });
+
+      refreshLucideIcons();
+    }
+
+    function selectIconInPicker(iconName, isAuto = false) {
+      const input = document.getElementById('app-form-icon');
+      if (input) input.value = iconName;
+
+      const previewBox = document.getElementById('icon-picker-preview-box');
+      if (previewBox) {
+        previewBox.innerHTML = `<i data-lucide="${iconName}"></i>`;
+        refreshLucideIcons();
+      }
+
+      document.querySelectorAll('.icon-grid-item').forEach(btn => {
+        if (btn.dataset.icon === iconName) {
+          btn.classList.add('active');
+          btn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+
+      const hint = document.getElementById('icon-picker-hint-text');
+      if (hint) {
+        hint.textContent = isAuto ? '💡 แนะนำไอคอนให้อัตโนมัติ (คลิกเปลี่ยนได้)' : '✓ เลือกไอคอน: ' + iconName;
+      }
+    }
+
     function openAddAppModal() {
       document.getElementById('modal-app-form-title').textContent = 'เพิ่มแอปพลิเคชันใหม่';
       document.getElementById('form-app-crud').reset();
@@ -3728,6 +4224,8 @@ function sendToPortal(action, payload) {
       document.getElementById('app-form-visible').checked = true;
 
       populateCategoryDatalist();
+      initIconPicker();
+      selectIconInPicker('calendar');
       document.getElementById('modal-app-form').classList.add('active');
     }
 
@@ -3746,15 +4244,23 @@ function sendToPortal(action, payload) {
       document.getElementById('app-form-desc').value = app.description || '';
       document.getElementById('app-form-visible').checked = app.visible !== false;
 
-      populateCategoryDatalist();
+      populateCategoryDatalist(app.category);
+      initIconPicker();
+      selectIconInPicker(app.icon || 'layout-grid');
       document.getElementById('modal-app-form').classList.add('active');
     }
 
-    function populateCategoryDatalist() {
-      const datalist = document.getElementById('category-datalist');
-      if (!datalist) return;
-      const cats = new Set([...appConfig.categories, ...appConfig.apps.map(a => a.category)]);
-      datalist.innerHTML = Array.from(cats).map(c => `<option value="${c}">`).join('');
+    function populateCategoryDatalist(selectedVal = '') {
+      const select = document.getElementById('app-form-category-select');
+      if (!select) return;
+      const cats = Array.from(new Set([...(appConfig.categories || []), ...appConfig.apps.map(a => a.category)]));
+      select.innerHTML = cats.map(c => `<option value="${c}" ${c === selectedVal ? 'selected' : ''}>${c}</option>`).join('');
+      
+      const customInput = document.getElementById('app-form-category-custom');
+      if (customInput) {
+        customInput.style.display = 'none';
+        customInput.value = '';
+      }
     }
 
     function handleSaveApp(e) {
@@ -3762,7 +4268,12 @@ function sendToPortal(action, payload) {
       const id = document.getElementById('app-form-id').value || 'app-' + Date.now();
       const name = document.getElementById('app-form-name').value.trim();
       const url = document.getElementById('app-form-url').value.trim();
-      const category = document.getElementById('app-form-category').value.trim() || 'ทั่วไป';
+      let category = document.getElementById('app-form-category-select').value;
+      const customCat = document.getElementById('app-form-category-custom')?.value.trim();
+      if (customCat) {
+        category = customCat;
+      }
+      if (!category) category = 'ทั่วไป';
       const icon = document.getElementById('app-form-icon').value.trim() || 'layout-grid';
       const badge = document.getElementById('app-form-badge').value.trim();
       const openMode = document.getElementById('app-form-openmode').value;
@@ -4122,6 +4633,9 @@ function sendToPortal(action, payload) {
           this.classList.add('active');
           const target = document.getElementById(this.dataset.tab);
           if (target) target.classList.add('active');
+          if (this.dataset.tab === 'tab-categories') {
+            renderCategoriesManager();
+          }
           refreshLucideIcons();
         });
       });
@@ -4163,6 +4677,43 @@ function sendToPortal(action, payload) {
         document.getElementById('setting-portal-logo').value = SMART_LOPPAO_MODERN_LOGO_BASE64;
         showToast('เลือกโลโก้ Smart loppao (โมเดิร์น) เรียบร้อย');
       });
+      // Category & Icon picker event listeners
+      document.getElementById('form-add-category')?.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const input = document.getElementById('input-new-category-name');
+        const name = input.value.trim();
+        if (!name) return;
+        if (!appConfig.categories.includes(name)) {
+          appConfig.categories.push(name);
+          saveConfig();
+          renderCategoriesManager();
+          showToast(`เพิ่มหมวดหมู่ "${name}" เรียบร้อยแล้ว`, 'success');
+        } else {
+          showToast(`มีหมวดหมู่ "${name}" อยู่แล้ว`, 'info');
+        }
+        input.value = '';
+      });
+
+      document.getElementById('btn-toggle-custom-cat')?.addEventListener('click', () => {
+        const customInput = document.getElementById('app-form-category-custom');
+        if (customInput) {
+          customInput.style.display = customInput.style.display === 'none' ? 'block' : 'none';
+          if (customInput.style.display === 'block') customInput.focus();
+        }
+      });
+
+      document.getElementById('app-form-icon')?.addEventListener('input', function() {
+        const val = this.value.trim();
+        if (val) selectIconInPicker(val);
+      });
+
+      document.getElementById('app-form-name')?.addEventListener('input', function() {
+        const suggested = getSuggestedIcon(this.value);
+        if (suggested) {
+          selectIconInPicker(suggested, true);
+        }
+      });
+
       document.getElementById('form-general-settings')?.addEventListener('submit', handleSaveSettings);
       document.getElementById('form-cloud-sync')?.addEventListener('submit', handleSaveCloudSyncUrl);
       document.getElementById('btn-fetch-cloud-config')?.addEventListener('click', () => {
