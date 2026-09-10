@@ -2684,7 +2684,7 @@ function sendToPortal(action, payload) {
       maxCachedIframes: 5,
       iframeTimeoutSeconds: 15,
       adminPasswordHash: "8bccc8ba66137310285e4f297ab601fd3912e85849841caffb0aad20ac6f0d78",
-      cloudSyncUrl: "",
+      cloudSyncUrl: "https://script.google.com/macros/s/AKfycbx5d1eWV9eBhG6HO8vyIf1YX30AsQlF5-8UzxcZY2RoXIZmo1HoRj9mEkbz29IIG4Ka/exec",
       categories: [
         "งานบริหารทั่วไปและอำนวยการ",
         "ระบบงานบุคคลและสวัสดิการ",
@@ -2692,66 +2692,42 @@ function sendToPortal(action, payload) {
         "บริการประชาชนและสารสนเทศ"
       ],
       apps: [
-        {
-          id: "app-meeting-room",
-          name: "ระบบจองห้องประชุมและยานพาหนะ",
-          url: "https://script.google.com/macros/s/AKfyc_SAMPLE_MEETING_SYS_01/exec",
-          category: "งานบริหารทั่วไปและอำนวยการ",
-          icon: "calendar",
-          description: "ตรวจสอบตารางเวลา จองห้องประชุม และขอใช้ยานพาหนะส่วนกลาง อบจ.ลพบุรี",
-          badge: "แนะนำ",
-          order: 1,
-          visible: true,
-          openMode: "iframe"
-        },
-        {
-          id: "app-leave-system",
-          name: "ระบบลงเวลาและขอลางานออนไลน์",
-          url: "https://script.google.com/macros/s/AKfycbz_SAMPLE_LEAVE_SYS_02/exec",
-          category: "ระบบงานบุคคลและสวัสดิการ",
-          icon: "calendar-check-2",
-          description: "บันทึกเวลาปฏิบัติราชการ ยื่นใบลาออนไลน์ และตรวจสอบโควตาวันลาคงเหลือ",
-          badge: "ยอดนิยม",
-          order: 2,
-          visible: true,
-          openMode: "iframe"
-        },
-        {
-          id: "app-procurement",
-          name: "ระบบขออนุมัติจัดซื้อและเบิกพัสดุ",
-          url: "https://script.google.com/macros/s/AKfycbz_SAMPLE_PROCURE_SYS_03/exec",
-          category: "ระบบจัดซื้อจัดจ้างและพัสดุ",
-          icon: "shopping-cart",
-          description: "ส่งใบขอซื้อ/จ้าง (PR) ตรวจสอบสต็อกวัสดุอุปกรณ์ และติดตามสถานะการอนุมัติ",
-          badge: "อัปเดต",
-          order: 3,
-          visible: true,
-          openMode: "iframe"
-        },
-        {
-          id: "app-it-helpdesk",
-          name: "ระบบแจ้งซ่อมและสนับสนุนงาน IT",
-          url: "https://script.google.com/macros/s/AKfycbz_SAMPLE_IT_HELPDESK_04/exec",
-          category: "บริการประชาชนและสารสนเทศ",
-          icon: "laptop",
-          description: "แจ้งปัญหาการใช้งานคอมพิวเตอร์ เครือข่าย ระบบอินเทอร์เน็ต และงานสนับสนุนด้านเทคนิค",
-          badge: "24/7",
-          order: 4,
-          visible: true,
-          openMode: "iframe"
-        },
-        {
-          id: "app-citizen-service",
-          name: "ศูนย์รับเรื่องร้องเรียนและบริการประชาชน",
-          url: "https://script.google.com/macros/s/AKfycbz_SAMPLE_CITIZEN_05/exec",
-          category: "บริการประชาชนและสารสนเทศ",
-          icon: "heart-handshake",
-          description: "รับฟังความคิดเห็น เรื่องร้องทุกข์ ติดตามสถานะคำร้องของประชาชนในจังหวัดลพบุรี",
-          badge: "ประชาชน",
-          order: 5,
-          visible: true,
-          openMode: "iframe"
-        }
+              {
+                      "id": "app-1788934620831",
+                      "name": "ศูนย์ข้อมูลบริหารเชิงพื้นที่ GIS",
+                      "url": "https://app.powerbi.com/view?r=eyJrIjoiMTkxMzRlZGEtMTJlOC00NDEwLWI1MmQtOTE3ZGI1NDdhYzEzIiwidCI6ImY2NGQzMTgzLTc2OTEtNGZjYi1hNWVmLTM5ZWJjMDgyYmZmOSIsImMiOjEwfQ==",
+                      "category": "บริการประชาชนและสารสนเทศ",
+                      "icon": "layout-grid",
+                      "badge": "",
+                      "openMode": "iframe",
+                      "description": "",
+                      "visible": true,
+                      "order": 6
+              },
+              {
+                      "id": "app-1788934908127",
+                      "name": "ระบบบริหารครุภัณฑ์",
+                      "url": "https://demo.asset-stsc.org/",
+                      "category": "ระบบจัดซื้อจัดจ้างและพัสดุ",
+                      "icon": "layout-grid",
+                      "badge": "",
+                      "openMode": "iframe",
+                      "description": "",
+                      "visible": true,
+                      "order": 7
+              },
+              {
+                      "id": "app-1789007856894",
+                      "name": "จองห้องประชุม",
+                      "url": "https://script.google.com/macros/s/AKfycbwtvFMZ2tPlWBOWFCktiH9NA4dIzAS5T6_nLCuidLzKLyTfnklRZhNYeqbMW6B35xoz/exec",
+                      "category": "งานบริหารทั่วไปและอำนวยการ",
+                      "icon": "layout-grid",
+                      "badge": "",
+                      "openMode": "iframe",
+                      "description": "",
+                      "visible": true,
+                      "order": 3
+              }
       ]
     };
 
@@ -2833,6 +2809,11 @@ function sendToPortal(action, payload) {
       if (!appConfig.portalLogo || appConfig.portalLogo === 'logo.png') {
         appConfig.portalLogo = DEFAULT_LOPPAO_LOGO_BASE64;
       }
+      // อัปเกรดอัตโนมัติให้ชี้ไปยัง Cloud Sync URL ของ GAS ทันที
+      if (!appConfig.cloudSyncUrl || appConfig.cloudSyncUrl === "") {
+        appConfig.cloudSyncUrl = "https://script.google.com/macros/s/AKfycbx5d1eWV9eBhG6HO8vyIf1YX30AsQlF5-8UzxcZY2RoXIZmo1HoRj9mEkbz29IIG4Ka/exec";
+      }
+
       if (appConfig.adminPasswordHash === "ac9689e2272427085e35b9d3e3e8bed88cb3434828b43b86fc0596cad4c6e270") {
         appConfig.adminPasswordHash = DEFAULT_CONFIG.adminPasswordHash;
       }
