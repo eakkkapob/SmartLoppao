@@ -2208,6 +2208,14 @@
 
       <!-- Sidebar Footer -->
       <div class="sidebar-footer">
+        <button class="sidebar-footer-action" id="sidebar-staff-login-item" title="เข้าสู่ระบบเจ้าหน้าที่" style="width: auto; padding: 0 10px; gap: 6px; color: var(--primary-color); background: rgba(2, 132, 199, 0.1);">
+          <i data-lucide="lock" style="width: 14px; height: 14px;"></i>
+          <span class="hide-on-collapse" style="font-size: 12px; font-weight: 600;">สำหรับเจ้าหน้าที่</span>
+        </button>
+        <button class="sidebar-footer-action" id="sidebar-staff-logout-item" title="ออกจากระบบเจ้าหน้าที่" style="display: none; width: auto; padding: 0 10px; gap: 6px; color: #ef4444; background: rgba(239, 68, 68, 0.1);">
+          <i data-lucide="log-out" style="width: 14px; height: 14px;"></i>
+          <span class="hide-on-collapse" style="font-size: 12px; font-weight: 600;">ออกโหมดเจ้าหน้าที่</span>
+        </button>
         <button class="sidebar-footer-icon-btn" id="theme-toggle-btn" aria-label="สลับโหมดมืด/สว่าง" title="สลับโหมดมืด/สว่าง">
           <i data-lucide="sun" id="theme-icon"></i>
         </button>
@@ -2246,6 +2254,23 @@
         </div>
 
         <div class="topbar-right">
+          <!-- Staff Access Controls in Topbar -->
+          <div id="topbar-staff-container" style="display: flex; align-items: center; margin-right: 6px;">
+            <button class="topbar-action-btn" id="btn-staff-login-topbar" title="เข้าสู่ระบบสำหรับเจ้าหน้าที่" style="color: var(--primary-color); font-weight: 600; border-color: rgba(2, 132, 199, 0.3); background: rgba(2, 132, 199, 0.06);">
+              <i data-lucide="lock" style="width: 14px; height: 14px;"></i>
+              <span>สำหรับเจ้าหน้าที่</span>
+            </button>
+            <div id="topbar-staff-active-box" style="display: none; align-items: center; gap: 6px;">
+              <span class="staff-mode-badge" style="display: flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; color: #0284c7; background: rgba(2, 132, 199, 0.1); border: 1px solid rgba(2, 132, 199, 0.25); padding: 4px 10px; border-radius: 9999px;">
+                <i data-lucide="shield-check" style="width: 14px; height: 14px;"></i>
+                <span>โหมดเจ้าหน้าที่</span>
+              </span>
+              <button class="topbar-action-btn" id="btn-staff-logout" title="ออกจากระบบเจ้าหน้าที่ (กลับสู่โหมดประชาชน)" style="font-size: 12px; color: var(--text-muted);">
+                <i data-lucide="log-out" style="width: 13px; height: 13px;"></i>
+                <span>ออกจากระบบ</span>
+              </button>
+            </div>
+          </div>
           <a href="#/home" class="topbar-action-btn topbar-icon-only" title="กลับหน้าแรก" aria-label="หน้าแรก">
             <i data-lucide="home" style="width: 16px; height: 16px;"></i>
           </a>
@@ -2296,6 +2321,35 @@
                 <div class="stat-label">หมวดหมู่</div>
               </div>
             </div>
+          </div>
+
+          <!-- Public Mode Notice Banner -->
+          <div id="banner-public-mode-notice" style="margin-bottom: 20px; background: linear-gradient(135deg, rgba(2, 132, 199, 0.08) 0%, rgba(30, 58, 138, 0.05) 100%); border: 1px solid rgba(2, 132, 199, 0.2); border-radius: var(--radius-md); padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <div style="width: 38px; height: 38px; border-radius: 50%; background: var(--primary-color); color: white; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 2px 5px rgba(2,132,199,0.25);">
+                <i data-lucide="users" style="width: 18px; height: 18px;"></i>
+              </div>
+              <div>
+                <div style="font-weight: 600; font-size: 13.5px; color: var(--text-main);">สำหรับประชาชนทั่วไป (แสดงเฉพาะหมวดหมู่ "บริการประชาชนและสารสนเทศ")</div>
+                <div style="font-size: 12px; color: var(--text-muted); margin-top: 1px;">หากท่านเป็นเจ้าหน้าที่ อบจ.ลพบุรี สามารถเข้าสู่ระบบเพื่อใช้งานระบบงานภายในทั้งหมด</div>
+              </div>
+            </div>
+            <button type="button" class="btn btn-primary btn-sm" id="btn-staff-login-banner" style="white-space: nowrap; display: flex; align-items: center; gap: 6px; border-radius: 9999px; padding: 7px 16px; box-shadow: 0 2px 6px rgba(2,132,199,0.3);">
+              <i data-lucide="lock" style="width: 14px; height: 14px;"></i>
+              <span>เข้าใช้งานสำหรับเจ้าหน้าที่</span>
+            </button>
+          </div>
+
+          <!-- Staff Mode Active Notice Banner -->
+          <div id="banner-staff-mode-active" style="display: none; margin-bottom: 20px; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: var(--radius-md); padding: 12px 18px; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <i data-lucide="shield-check" style="width: 20px; height: 20px; color: #10b981;"></i>
+              <span style="font-size: 13.5px; font-weight: 600; color: var(--text-main);">ยินดีต้อนรับเจ้าหน้าที่ อบจ.ลพบุรี (ปลดล็อกระบบงานภายในทั้งหมดแล้ว)</span>
+            </div>
+            <button type="button" class="btn btn-secondary btn-sm" id="btn-staff-logout-banner" style="font-size: 12px; padding: 5px 12px; border-radius: 9999px; display: flex; align-items: center; gap: 5px;">
+              <i data-lucide="log-out" style="width: 13px; height: 13px;"></i>
+              <span>สลับกลับสู่โหมดประชาชน</span>
+            </button>
           </div>
 
           <!-- Filter Toolbar -->
@@ -2692,6 +2746,52 @@ function sendToPortal(action, payload) {
   </div>
 
   <!-- =============================================================== -->
+  <!-- MODAL: STAFF LOGIN AUTH GATE                                    -->
+  <!-- =============================================================== -->
+  <div class="modal-backdrop" id="modal-staff-auth">
+    <div class="modal-window" style="max-width: 420px;">
+      <div class="modal-header">
+        <div class="modal-title" style="display: flex; align-items: center; gap: 8px;">
+          <i data-lucide="shield-check" style="width: 18px; height: 18px; color: var(--primary-color);"></i>
+          <span>เข้าสู่ระบบสำหรับเจ้าหน้าที่</span>
+        </div>
+        <button class="modal-close-btn" id="btn-close-staff-modal" aria-label="ปิด"><i data-lucide="x"></i></button>
+      </div>
+      <form id="form-staff-auth">
+        <div class="modal-body">
+          <div style="text-align: center; margin-bottom: 12px;">
+            <div style="width: 52px; height: 52px; border-radius: 50%; background: rgba(2, 132, 199, 0.12); color: var(--primary-color); display: flex; align-items: center; justify-content: center; margin: 0 auto 12px;">
+              <i data-lucide="lock" style="width: 26px; height: 26px;"></i>
+            </div>
+            <h4 style="font-size: 15px; font-weight: 600; color: var(--text-main); margin-bottom: 4px;">เข้าใช้งานระบบงานภายใน อบจ.ลพบุรี</h4>
+            <p style="font-size: 13px; color: var(--text-muted);">กรุณากรอกรหัสผ่านเจ้าหน้าที่ เพื่อปลดล็อกระบบงานที่เหลือทั้งหมด</p>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="input-staff-pass">รหัสผ่านเจ้าหน้าที่ *</label>
+            <div style="position: relative;">
+              <input type="password" id="input-staff-pass" class="form-input" placeholder="กรอกรหัสผ่านเจ้าหน้าที่..." required autofocus style="padding-right: 40px;">
+              <button type="button" id="btn-toggle-staff-pass-visibility" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--text-muted);" title="แสดง/ซ่อนรหัสผ่าน">
+                <i data-lucide="eye" style="width: 16px; height: 16px;" id="icon-staff-eye"></i>
+              </button>
+            </div>
+          </div>
+          <div id="staff-auth-error-msg" style="color: #ef4444; font-size: 12.5px; display: none; margin-top: 4px; align-items: center; gap: 4px;">
+            <i data-lucide="alert-circle" style="width: 14px; height: 14px;"></i>
+            <span>รหัสผ่านเจ้าหน้าที่ไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง</span>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="btn-cancel-staff-auth">ยกเลิก</button>
+          <button type="submit" class="btn btn-primary" style="display: flex; align-items: center; gap: 6px;">
+            <i data-lucide="unlock" style="width: 15px; height: 15px;"></i>
+            <span>ปลดล็อกเข้าใช้งาน</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =============================================================== -->
   <!-- MODAL: ADMIN LOGIN AUTH GATE                                    -->
   <!-- =============================================================== -->
   <div class="modal-backdrop" id="modal-admin-auth">
@@ -2934,7 +3034,8 @@ function sendToPortal(action, payload) {
       accentColor: "#0284c7",
       maxCachedIframes: 5,
       iframeTimeoutSeconds: 15,
-      adminPasswordHash: "8bccc8ba66137310285e4f297ab601fd3912e85849841caffb0aad20ac6f0d78",
+      adminPasswordHash: "ef5e0022b11531fcd539cba1186cbfd272cb4903139b812db753a9a61c1d91ac",
+      staffPasswordHash: "8bccc8ba66137310285e4f297ab601fd3912e85849841caffb0aad20ac6f0d78",
       cloudSyncUrl: "https://script.google.com/macros/s/AKfycbx5d1eWV9eBhG6HO8vyIf1YX30AsQlF5-8UzxcZY2RoXIZmo1HoRj9mEkbz29IIG4Ka/exec",
       categories: [
         "งานบริหารทั่วไปและอำนวยการ",
@@ -2999,6 +3100,7 @@ function sendToPortal(action, payload) {
       applyThemeFromStorage();
       applyAccentColor(appConfig.accentColor);
       renderPortalMeta();
+      updateAudienceUI();
       renderSidebar();
       renderDashboard();
       initRouter();
@@ -3077,8 +3179,12 @@ function sendToPortal(action, payload) {
         });
       }
 
-      if (appConfig.adminPasswordHash === "ac9689e2272427085e35b9d3e3e8bed88cb3434828b43b86fc0596cad4c6e270") {
+      if (appConfig.adminPasswordHash === "ac9689e2272427085e35b9d3e3e8bed88cb3434828b43b86fc0596cad4c6e270" || 
+          appConfig.adminPasswordHash === "8bccc8ba66137310285e4f297ab601fd3912e85849841caffb0aad20ac6f0d78") {
         appConfig.adminPasswordHash = DEFAULT_CONFIG.adminPasswordHash;
+      }
+      if (!appConfig.staffPasswordHash) {
+        appConfig.staffPasswordHash = DEFAULT_CONFIG.staffPasswordHash;
       }
 
       if (!Array.isArray(appConfig.apps)) {
@@ -3102,6 +3208,14 @@ function sendToPortal(action, payload) {
                   const cloudData = JSON.parse(serverConfigStr);
                   if (cloudData && (cloudData.apps || cloudData.portalName)) {
                     appConfig = { ...DEFAULT_CONFIG, ...cloudData };
+                    if (appConfig.adminPasswordHash === "8bccc8ba66137310285e4f297ab601fd3912e85849841caffb0aad20ac6f0d78" || 
+                        appConfig.adminPasswordHash === "ac9689e2272427085e35b9d3e3e8bed88cb3434828b43b86fc0596cad4c6e270") {
+                      appConfig.adminPasswordHash = DEFAULT_CONFIG.adminPasswordHash;
+                    }
+                    if (!appConfig.staffPasswordHash) {
+                      appConfig.staffPasswordHash = DEFAULT_CONFIG.staffPasswordHash;
+                    }
+                    updateAudienceUI();
                     localStorage.setItem('portal_config_v1', JSON.stringify(appConfig));
                     applyThemeFromStorage();
                     applyAccentColor(appConfig.accentColor);
@@ -3146,6 +3260,15 @@ function sendToPortal(action, payload) {
         .then(cloudData => {
           if (cloudData && (cloudData.apps || cloudData.portalName)) {
             appConfig = { ...DEFAULT_CONFIG, ...cloudData };
+            // อัปเกรดรหัสผ่าน Admin หากคลาวด์ยังเก็บรหัสผ่านเดิม Loppao@1234
+            if (appConfig.adminPasswordHash === "8bccc8ba66137310285e4f297ab601fd3912e85849841caffb0aad20ac6f0d78" || 
+                appConfig.adminPasswordHash === "ac9689e2272427085e35b9d3e3e8bed88cb3434828b43b86fc0596cad4c6e270") {
+              appConfig.adminPasswordHash = DEFAULT_CONFIG.adminPasswordHash;
+            }
+            if (!appConfig.staffPasswordHash) {
+              appConfig.staffPasswordHash = DEFAULT_CONFIG.staffPasswordHash;
+            }
+            updateAudienceUI();
             localStorage.setItem('portal_config_v1', JSON.stringify(appConfig));
             applyThemeFromStorage();
             applyAccentColor(appConfig.accentColor);
@@ -3400,6 +3523,14 @@ function sendToPortal(action, payload) {
         return;
       }
 
+      // ตรวจสอบสิทธิ์การเข้าถึงสำหรับประชาชนทั่วไป
+      if (!isStaffLoggedIn() && (app.category || '').trim() !== 'บริการประชาชนและสารสนเทศ') {
+        showToast("ระบบนี้สงวนไว้สำหรับเจ้าหน้าที่ กรุณากรอกรหัสผ่านเพื่อเข้าใช้งาน", "info");
+        openStaffAuthModal();
+        window.location.hash = '#/home';
+        return;
+      }
+
       if (app.openMode === 'newtab') {
         window.open(app.url, '_blank');
         window.location.hash = '#/home';
@@ -3618,6 +3749,105 @@ function sendToPortal(action, payload) {
       }
     }
 
+    
+    // =============================================================
+    // AUDIENCE & ROLE MANAGEMENT (PUBLIC vs STAFF vs ADMIN)
+    // =============================================================
+    const DEFAULT_STAFF_HASH = "8bccc8ba66137310285e4f297ab601fd3912e85849841caffb0aad20ac6f0d78"; // Loppao@1234
+    const DEFAULT_ADMIN_HASH = "ef5e0022b11531fcd539cba1186cbfd272cb4903139b812db753a9a61c1d91ac"; // Loppao@111028
+
+    function isStaffLoggedIn() {
+      return sessionStorage.getItem('portal_user_role') === 'staff' || sessionStorage.getItem('portal_admin_session') === 'true';
+    }
+
+    function getAudienceApps() {
+      const isStaff = isStaffLoggedIn();
+      return appConfig.apps.filter(app => {
+        if (!app.visible) return false;
+        if (isStaff) return true;
+        // โหมดประชาชนทั่วไป: แสดงเฉพาะหมวดหมู่ "บริการประชาชนและสารสนเทศ" เท่านั้น
+        return (app.category || '').trim() === 'บริการประชาชนและสารสนเทศ';
+      });
+    }
+
+    function updateAudienceUI() {
+      const isStaff = isStaffLoggedIn();
+
+      // Topbar buttons
+      const btnStaffLogin = document.getElementById('btn-staff-login-topbar');
+      const staffActiveBox = document.getElementById('topbar-staff-active-box');
+      if (btnStaffLogin) btnStaffLogin.style.display = isStaff ? 'none' : 'flex';
+      if (staffActiveBox) staffActiveBox.style.display = isStaff ? 'flex' : 'none';
+
+      // Dashboard Notice Banners
+      const publicNotice = document.getElementById('banner-public-mode-notice');
+      const staffNotice = document.getElementById('banner-staff-mode-active');
+      if (publicNotice) publicNotice.style.display = isStaff ? 'none' : 'flex';
+      if (staffNotice) staffNotice.style.display = isStaff ? 'flex' : 'none';
+
+      // Sidebar Action Buttons
+      const sidebarStaffItem = document.getElementById('sidebar-staff-login-item');
+      const sidebarStaffLogoutItem = document.getElementById('sidebar-staff-logout-item');
+      if (sidebarStaffItem) sidebarStaffItem.style.display = isStaff ? 'none' : 'flex';
+      if (sidebarStaffLogoutItem) sidebarStaffLogoutItem.style.display = isStaff ? 'flex' : 'none';
+
+      refreshLucideIcons();
+    }
+
+    function openStaffAuthModal() {
+      const modal = document.getElementById('modal-staff-auth');
+      if (!modal) return;
+      modal.classList.add('active');
+      const input = document.getElementById('input-staff-pass');
+      if (input) {
+        input.value = '';
+        input.type = 'password';
+        setTimeout(() => input.focus(), 50);
+      }
+      const err = document.getElementById('staff-auth-error-msg');
+      if (err) err.style.display = 'none';
+      refreshLucideIcons();
+    }
+
+    function closeStaffAuthModal() {
+      const modal = document.getElementById('modal-staff-auth');
+      if (modal) modal.classList.remove('active');
+    }
+
+    async function handleStaffLogin(e) {
+      if (e) e.preventDefault();
+      const input = document.getElementById('input-staff-pass');
+      const pass = input ? input.value : '';
+      const hash = await sha256(pass);
+
+      const validStaffHash = appConfig.staffPasswordHash || DEFAULT_STAFF_HASH;
+      const validAdminHash = appConfig.adminPasswordHash || DEFAULT_ADMIN_HASH;
+
+      if (hash === validStaffHash || hash === validAdminHash) {
+        sessionStorage.setItem('portal_user_role', 'staff');
+        closeStaffAuthModal();
+        updateAudienceUI();
+        renderSidebar();
+        renderDashboard();
+        showToast('เข้าสู่ระบบสำหรับเจ้าหน้าที่สำเร็จ ปลดล็อกระบบงานทั้งหมดแล้ว', 'success');
+      } else {
+        const err = document.getElementById('staff-auth-error-msg');
+        if (err) {
+          err.style.display = 'flex';
+          refreshLucideIcons();
+        }
+      }
+    }
+
+    function staffLogout() {
+      sessionStorage.removeItem('portal_user_role');
+      showToast('ออกจากระบบเจ้าหน้าที่ กลับสู่โหมดประชาชนทั่วไปแล้ว', 'info');
+      updateAudienceUI();
+      activeCategoryFilter = 'all';
+      renderSidebar();
+      renderDashboard();
+    }
+
     function renderPortalMeta() {
       const effectiveLogo = getEffectiveLogoSrc(appConfig.portalLogo);
 
@@ -3664,8 +3894,8 @@ function sendToPortal(action, payload) {
 
       const searchKeyword = (document.getElementById('sidebar-search-input')?.value || '').toLowerCase().trim();
 
-      const visibleApps = appConfig.apps.filter(app => {
-        if (!app.visible) return false;
+      const audienceApps = getAudienceApps();
+      const visibleApps = audienceApps.filter(app => {
         if (!searchKeyword) return true;
         return app.name.toLowerCase().includes(searchKeyword) || 
                app.category.toLowerCase().includes(searchKeyword) ||
@@ -3740,14 +3970,20 @@ function sendToPortal(action, payload) {
 
       grid.innerHTML = '';
 
-      const allCategories = new Set(appConfig.apps.filter(a => a.visible).map(a => a.category || 'ทั่วไป'));
+      const audienceApps = getAudienceApps();
+      const isStaff = isStaffLoggedIn();
+      const allCategories = new Set(audienceApps.map(a => a.category || 'ทั่วไป'));
+      
       let pillsHtml = `<button class="pill-btn ${activeCategoryFilter === 'all' ? 'active' : ''}" onclick="setCategoryFilter('all')">ทั้งหมด</button>`;
       allCategories.forEach(cat => {
         pillsHtml += `<button class="pill-btn ${activeCategoryFilter === cat ? 'active' : ''}" onclick="setCategoryFilter('${cat}')">${cat}</button>`;
       });
+      if (!isStaff) {
+        pillsHtml += `<button class="pill-btn" onclick="openStaffAuthModal()" style="color: var(--primary-color); border-color: rgba(2, 132, 199, 0.4); background: rgba(2, 132, 199, 0.08); display: inline-flex; align-items: center; gap: 4px;"><i data-lucide="lock" style="width: 12px; height: 12px;"></i> สำหรับเจ้าหน้าที่</button>`;
+      }
       pillsContainer.innerHTML = pillsHtml;
 
-      const visibleApps = appConfig.apps.filter(a => a.visible);
+      const visibleApps = audienceApps;
       document.getElementById('stat-total-apps').textContent = visibleApps.length;
       document.getElementById('stat-total-cats').textContent = allCategories.size;
       document.getElementById('stat-fav-apps').textContent = favorites.length;
@@ -3931,10 +4167,14 @@ function sendToPortal(action, payload) {
       const pass = document.getElementById('input-admin-pass').value;
       const hash = await sha256(pass);
 
-      if (hash === appConfig.adminPasswordHash) {
+      if (hash === appConfig.adminPasswordHash || hash === DEFAULT_CONFIG.adminPasswordHash) {
+        appConfig.adminPasswordHash = DEFAULT_CONFIG.adminPasswordHash;
+        saveConfig();
         sessionStorage.setItem('portal_admin_session', 'true');
+        sessionStorage.setItem('portal_user_role', 'staff');
         document.getElementById('modal-admin-auth').classList.remove('active');
-        showToast("เข้าสู่ระบบผู้ดูแลระบบสำเร็จ", "success");
+        showToast("เข้าสู่ระบบผู้ดูแลระบบสำเร็จ (Loppao@111028)", "success");
+        updateAudienceUI();
         navigateToAdmin();
       } else {
         document.getElementById('auth-error-msg').style.display = 'block';
@@ -4638,6 +4878,33 @@ function sendToPortal(action, payload) {
           }
           refreshLucideIcons();
         });
+      });
+
+      // Staff Auth Event Listeners
+      document.getElementById('btn-staff-login-topbar')?.addEventListener('click', openStaffAuthModal);
+      document.getElementById('btn-staff-login-banner')?.addEventListener('click', openStaffAuthModal);
+      document.getElementById('sidebar-staff-login-item')?.addEventListener('click', openStaffAuthModal);
+      
+      document.getElementById('btn-staff-logout')?.addEventListener('click', staffLogout);
+      document.getElementById('btn-staff-logout-banner')?.addEventListener('click', staffLogout);
+      document.getElementById('sidebar-staff-logout-item')?.addEventListener('click', staffLogout);
+
+      document.getElementById('btn-close-staff-modal')?.addEventListener('click', closeStaffAuthModal);
+      document.getElementById('btn-cancel-staff-auth')?.addEventListener('click', closeStaffAuthModal);
+      document.getElementById('form-staff-auth')?.addEventListener('submit', handleStaffLogin);
+
+      document.getElementById('btn-toggle-staff-pass-visibility')?.addEventListener('click', () => {
+        const passInput = document.getElementById('input-staff-pass');
+        const eyeIcon = document.getElementById('icon-staff-eye');
+        if (!passInput) return;
+        if (passInput.type === 'password') {
+          passInput.type = 'text';
+          if (eyeIcon) eyeIcon.setAttribute('data-lucide', 'eye-off');
+        } else {
+          passInput.type = 'password';
+          if (eyeIcon) eyeIcon.setAttribute('data-lucide', 'eye');
+        }
+        refreshLucideIcons();
       });
 
       document.getElementById('form-admin-auth')?.addEventListener('submit', handleAdminLogin);
