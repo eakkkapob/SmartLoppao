@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>Smart loppao | ศูนย์รวมระบบงานและแอปพลิเคชัน องค์การบริหารส่วนจังหวัดลพบุรี</title>
 
   <!-- ================================================================= -->
@@ -2418,7 +2421,7 @@
                 <i data-lucide="shield-check" style="width: 14px; height: 14px;"></i>
                 <span>เจ้าหน้าที่ อบจ.ลพบุรี</span>
               </div>
-              <button class="topbar-staff-logout-btn" id="btn-staff-logout" title="ออกจากระบบเจ้าหน้าที่ (กลับสู่โหมดประชาชน)">
+              <button class="topbar-staff-logout-btn" id="btn-staff-logout" onclick="staffLogout()" title="ออกจากระบบเจ้าหน้าที่ (กลับสู่โหมดประชาชน)">
                 <i data-lucide="log-out" style="width: 13px; height: 13px;"></i>
                 <span>ออกจากระบบ</span>
               </button>
@@ -2555,7 +2558,7 @@
                 </h2>
                 <p>จัดการระบบงาน ลำดับเมนู ตั้งค่ารูปลักษณ์ Smart loppao และการเชื่อมต่อ Google Apps Script</p>
               </div>
-              <button class="btn btn-secondary" id="btn-admin-logout">
+              <button class="btn btn-secondary" id="btn-admin-logout" onclick="adminLogout()">
                 <i data-lucide="log-out" style="width: 15px; height: 15px;"></i>
                 <span>ออกจากระบบ Admin</span>
               </button>
@@ -3987,10 +3990,22 @@ function getSuggestedIcon(name) {
     }
 
     function staffLogout() {
+      // ล้างสิทธิ์การเข้าใช้งานทั้งหมด (ทั้ง Staff และ Admin)
       sessionStorage.removeItem('portal_user_role');
-      showToast('ออกจากระบบเจ้าหน้าที่ กลับสู่โหมดประชาชนทั่วไปแล้ว', 'info');
-      updateAudienceUI();
+      sessionStorage.removeItem('portal_admin_session');
+      localStorage.removeItem('portal_user_role');
+      localStorage.removeItem('portal_admin_session');
+
       activeCategoryFilter = 'all';
+      filterFavoritesOnly = false;
+
+      updateAudienceUI();
+      showToast('ออกจากระบบเจ้าหน้าที่ กลับสู่โหมดประชาชนทั่วไปแล้ว', 'info');
+
+      if (window.location.hash && window.location.hash !== '#/home' && window.location.hash !== '#') {
+        window.location.hash = '#/home';
+      }
+      navigateToHome();
       renderSidebar();
       renderDashboard();
     }
@@ -4328,8 +4343,20 @@ function getSuggestedIcon(name) {
 
     function adminLogout() {
       sessionStorage.removeItem('portal_admin_session');
+      sessionStorage.removeItem('portal_user_role');
+      localStorage.removeItem('portal_admin_session');
+      localStorage.removeItem('portal_user_role');
+
+      activeCategoryFilter = 'all';
+      filterFavoritesOnly = false;
+
+      updateAudienceUI();
       showToast("ออกจากระบบ Admin เรียบร้อยแล้ว", "info");
+
       window.location.hash = '#/home';
+      navigateToHome();
+      renderSidebar();
+      renderDashboard();
     }
 
     function renderAdminAppsTable() {
