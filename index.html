@@ -5747,7 +5747,93 @@ function getSuggestedIcon(name) {
         document.getElementById('setting-portal-logo').value = SMART_LOPPAO_MODERN_LOGO_BASE64;
         showToast('เลือกโลโก้ Smart loppao (โมเดิร์น) เรียบร้อย');
       });
-  
+
+// Category & Icon picker event listeners
+      document.getElementById('form-add-category')?.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const input = document.getElementById('input-new-category-name');
+        const name = input.value.trim();
+        if (!name) return;
+        if (!appConfig.categories.includes(name)) {
+          appConfig.categories.push(name);
+          saveConfig();
+          renderCategoriesManager();
+          showToast(`เพิ่มหมวดหมู่ "${name}" เรียบร้อยแล้ว`, 'success');
+        } else {
+          showToast(`มีหมวดหมู่ "${name}" อยู่แล้ว`, 'info');
+        }
+        input.value = '';
+      });
+
+      document.getElementById('btn-toggle-custom-cat')?.addEventListener('click', () => {
+        const customInput = document.getElementById('app-form-category-custom');
+        if (customInput) {
+          customInput.style.display = customInput.style.display === 'none' ? 'block' : 'none';
+          if (customInput.style.display === 'block') customInput.focus();
+        }
+      });
+
+      document.getElementById('app-form-icon')?.addEventListener('input', function() {
+        const val = this.value.trim();
+        if (val) selectIconInPicker(val);
+      });
+
+      document.getElementById('app-form-name')?.addEventListener('input', function() {
+        const suggested = getSuggestedIcon(this.value);
+        if (suggested) {
+          selectIconInPicker(suggested, true);
+        }
+      });
+
+      document.getElementById('form-general-settings')?.addEventListener('submit', handleSaveSettings);
+      document.getElementById('form-cloud-sync')?.addEventListener('submit', handleSaveCloudSyncUrl);
+      document.getElementById('btn-fetch-cloud-config')?.addEventListener('click', () => {
+        const url = document.getElementById('setting-cloud-sync-url').value.trim() || appConfig.cloudSyncUrl;
+        fetchCloudConfig(url, true);
+      });
+      document.getElementById('form-change-password')?.addEventListener('submit', handleChangePassword);
+
+      document.querySelectorAll('.color-preset-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const color = this.dataset.color;
+          appConfig.accentColor = color;
+          document.getElementById('setting-accent-hex').textContent = color;
+          document.getElementById('setting-accent-picker').value = color;
+          applyAccentColor(color);
+        });
+      });
+
+      document.getElementById('setting-accent-picker')?.addEventListener('input', function() {
+        const color = this.value;
+        appConfig.accentColor = color;
+        document.getElementById('setting-accent-hex').textContent = color;
+        applyAccentColor(color);
+      });
+
+      document.getElementById('btn-export-json')?.addEventListener('click', exportConfigJson);
+      document.getElementById('input-import-file')?.addEventListener('change', importConfigFile);
+      document.getElementById('btn-copy-config-html')?.addEventListener('click', copyConfigForHtml);
+      document.getElementById('btn-reset-defaults')?.addEventListener('click', resetToDefaults);
+
+      document.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+          e.preventDefault();
+          const searchInput = document.getElementById('sidebar-search-input');
+          const sidebar = document.getElementById('sidebar');
+          if (sidebar && sidebar.classList.contains('collapsed')) {
+            toggleSidebar();
+          }
+          searchInput?.focus();
+        } else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'b') {
+          e.preventDefault();
+          toggleSidebar();
+        } else if (e.key === 'Escape') {
+          document.querySelectorAll('.modal-backdrop.active').forEach(m => m.classList.remove('active'));
+          document.getElementById('test-preview-iframe').src = '';
+        }
+      });
+    }
+
     // =================================================================
     // 14. UNIVERSAL API & OPEN DATA VIEWER MODULE
     // ระบบเชื่อมต่อและแสดงผล API ข้อมูลเปิด (เช่น MOPH HDC สธ.) ในตัวพอร์ทัล
@@ -5800,7 +5886,7 @@ function getSuggestedIcon(name) {
         }
       }
 
-      // เรนเดอร์ตัวเลือกหมวดหมู่ 43 หมวด
+      // เรนเดอร์ตัวเลือกหมวดหมู่
       catSelect.innerHTML = mophCategoriesCache.map(cat => 
         `<option value="${cat.cat_id}">${cat.category_name} (${cat.report_total} รายงาน)</option>`
       ).join('');
@@ -5842,7 +5928,7 @@ function getSuggestedIcon(name) {
 
     async function handleApiReportChange(sourceTable) {
       const reportSelect = document.getElementById('api-report-select');
-      const selectedOpt = reportSelect.options[reportSelect.selectedIndex];
+      const selectedOpt = reportSelect ? reportSelect.options[reportSelect.selectedIndex] : null;
       const reportName = selectedOpt ? selectedOpt.getAttribute('data-report-name') : sourceTable;
 
       const reportTitleEl = document.getElementById('api-table-report-name');
@@ -5854,16 +5940,18 @@ function getSuggestedIcon(name) {
     }
 
     function handleApiAreaChange(val) {
-      filterAndRenderApiData();
+      fetchCurrentApiData(true);
     }
 
     async function fetchCurrentApiData(forceRefresh = false) {
       const reportSelect = document.getElementById('api-report-select');
       const yearSelect = document.getElementById('api-year-select');
+      const areaSelect = document.getElementById('api-area-select');
       const tbody = document.getElementById('api-data-table-tbody');
 
       const tableName = reportSelect ? reportSelect.value : 's_dm_control';
       const year = yearSelect ? parseInt(yearSelect.value, 10) : 2567;
+      const areaVal = areaSelect ? areaSelect.value : '16';
 
       if (!tableName) {
         showToast('กรุณาเลือกรายงานที่ต้องการดึงข้อมูล', 'info');
@@ -5876,15 +5964,20 @@ function getSuggestedIcon(name) {
 
       try {
         setProgressBar(true);
+        const payload = {
+          tableName: tableName,
+          year: year,
+          limit: 3000,
+          offset: 0
+        };
+        if (areaVal && areaVal !== 'all') {
+          payload.province = areaVal;
+        }
+
         const res = await fetch('https://opendata.moph.go.th/api/report_data', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            tableName: tableName,
-            year: year,
-            limit: 1000,
-            offset: 0
-          })
+          body: JSON.stringify(payload)
         });
 
         if (res.ok) {
@@ -5892,7 +5985,7 @@ function getSuggestedIcon(name) {
           currentApiRawData = Array.isArray(json.data) ? json.data : (Array.isArray(json) ? json : []);
           currentApiPage = 1;
           filterAndRenderApiData();
-          if (forceRefresh) showToast(`ดึงข้อมูล ${tableName} ปี ${year} สำเร็จแล้ว (${currentApiRawData.length} แถว)`, 'success');
+          if (forceRefresh) showToast(`ดึงข้อมูล ${tableName} ปี ${year} สำเร็จแล้ว (${currentApiRawData.length} รายการ)`, 'success');
         } else {
           throw new Error('HTTP ' + res.status);
         }
@@ -5913,7 +6006,7 @@ function getSuggestedIcon(name) {
       const areaVal = areaSelect ? areaSelect.value : '16';
       const query = searchInput ? searchInput.value.trim().toLowerCase() : '';
 
-      // 1. กรองตามพื้นที่
+      // 1. กรองตามพื้นที่ (กรณีดึงแบบ all หรือมีข้อมูลคละ)
       let list = currentApiRawData;
       if (areaVal && areaVal !== 'all') {
         list = list.filter(item => {
@@ -6086,93 +6179,21 @@ function getSuggestedIcon(name) {
       showToast('ดาวน์โหลดไฟล์ CSV เรียบร้อยแล้ว', 'success');
     }
 
-    // Category & Icon picker event listeners
-      document.getElementById('form-add-category')?.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const input = document.getElementById('input-new-category-name');
-        const name = input.value.trim();
-        if (!name) return;
-        if (!appConfig.categories.includes(name)) {
-          appConfig.categories.push(name);
-          saveConfig();
-          renderCategoriesManager();
-          showToast(`เพิ่มหมวดหมู่ "${name}" เรียบร้อยแล้ว`, 'success');
-        } else {
-          showToast(`มีหมวดหมู่ "${name}" อยู่แล้ว`, 'info');
-        }
-        input.value = '';
-      });
+    // Expose globally on window for inline event handlers and router
+    window.loadApiViewerApp = loadApiViewerApp;
+    window.initMophDashboard = initMophDashboard;
+    window.handleApiCategoryChange = handleApiCategoryChange;
+    window.handleApiReportChange = handleApiReportChange;
+    window.handleApiAreaChange = handleApiAreaChange;
+    window.fetchCurrentApiData = fetchCurrentApiData;
+    window.filterAndRenderApiData = filterAndRenderApiData;
+    window.renderApiStats = renderApiStats;
+    window.renderApiTable = renderApiTable;
+    window.handleApiTableSearch = handleApiTableSearch;
+    window.changeApiPage = changeApiPage;
+    window.exportApiDataToCsv = exportApiDataToCsv;
 
-      document.getElementById('btn-toggle-custom-cat')?.addEventListener('click', () => {
-        const customInput = document.getElementById('app-form-category-custom');
-        if (customInput) {
-          customInput.style.display = customInput.style.display === 'none' ? 'block' : 'none';
-          if (customInput.style.display === 'block') customInput.focus();
-        }
-      });
-
-      document.getElementById('app-form-icon')?.addEventListener('input', function() {
-        const val = this.value.trim();
-        if (val) selectIconInPicker(val);
-      });
-
-      document.getElementById('app-form-name')?.addEventListener('input', function() {
-        const suggested = getSuggestedIcon(this.value);
-        if (suggested) {
-          selectIconInPicker(suggested, true);
-        }
-      });
-
-      document.getElementById('form-general-settings')?.addEventListener('submit', handleSaveSettings);
-      document.getElementById('form-cloud-sync')?.addEventListener('submit', handleSaveCloudSyncUrl);
-      document.getElementById('btn-fetch-cloud-config')?.addEventListener('click', () => {
-        const url = document.getElementById('setting-cloud-sync-url').value.trim() || appConfig.cloudSyncUrl;
-        fetchCloudConfig(url, true);
-      });
-      document.getElementById('form-change-password')?.addEventListener('submit', handleChangePassword);
-
-      document.querySelectorAll('.color-preset-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-          const color = this.dataset.color;
-          appConfig.accentColor = color;
-          document.getElementById('setting-accent-hex').textContent = color;
-          document.getElementById('setting-accent-picker').value = color;
-          applyAccentColor(color);
-        });
-      });
-
-      document.getElementById('setting-accent-picker')?.addEventListener('input', function() {
-        const color = this.value;
-        appConfig.accentColor = color;
-        document.getElementById('setting-accent-hex').textContent = color;
-        applyAccentColor(color);
-      });
-
-      document.getElementById('btn-export-json')?.addEventListener('click', exportConfigJson);
-      document.getElementById('input-import-file')?.addEventListener('change', importConfigFile);
-      document.getElementById('btn-copy-config-html')?.addEventListener('click', copyConfigForHtml);
-      document.getElementById('btn-reset-defaults')?.addEventListener('click', resetToDefaults);
-
-      document.addEventListener('keydown', (e) => {
-        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
-          e.preventDefault();
-          const searchInput = document.getElementById('sidebar-search-input');
-          const sidebar = document.getElementById('sidebar');
-          if (sidebar && sidebar.classList.contains('collapsed')) {
-            toggleSidebar();
-          }
-          searchInput?.focus();
-        } else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'b') {
-          e.preventDefault();
-          toggleSidebar();
-        } else if (e.key === 'Escape') {
-          document.querySelectorAll('.modal-backdrop.active').forEach(m => m.classList.remove('active'));
-          document.getElementById('test-preview-iframe').src = '';
-        }
-      });
-    }
-
-    document.addEventListener('DOMContentLoaded', initPortal);
+document.addEventListener('DOMContentLoaded', initPortal);
   </script>
 </body>
 </html>
