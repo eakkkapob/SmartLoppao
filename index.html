@@ -5164,6 +5164,15 @@ function getSuggestedIcon(name) {
         apiSettings.style.display = (mode === 'api_viewer') ? 'block' : 'none';
         refreshLucideIcons();
       }
+      const urlLabel = document.querySelector('label[for="app-form-url"]');
+      const urlHelp = document.querySelector('#app-form-url').closest('.form-group')?.querySelector('.form-help');
+      if (mode === 'api_viewer') {
+        if (urlLabel) urlLabel.textContent = 'URL ของ REST API หรือ Open Data Endpoint *';
+        if (urlHelp) urlHelp.innerHTML = 'ระบุ API Base URL หรือ Endpoint เช่น <code>https://opendata.moph.go.th/api</code>';
+      } else {
+        if (urlLabel) urlLabel.textContent = 'URL ของ Google Apps Script Web App *';
+        if (urlHelp) urlHelp.innerHTML = 'ต้องเป็น URL ที่ลงท้ายด้วย <code>/exec</code> ของ Google Apps Script';
+      }
     }
 
     function openAddAppModal() {
@@ -5307,6 +5316,16 @@ function getSuggestedIcon(name) {
         renderAdminAppsTable();
         showToast("ลบระบบงานเรียบร้อยแล้ว", "info");
       }
+    }
+
+        function escapeHtml(str) {
+      if (str === null || str === undefined) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
     }
 
     async function testAppUrl(url, mode) {
