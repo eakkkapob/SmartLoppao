@@ -824,6 +824,251 @@
       display: none;
     }
 
+    /* VIEW 4: API & OPEN DATA VIEWER DASHBOARD STYLES */
+    #view-api-container {
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      padding: 24px 32px 64px;
+      display: none;
+    }
+
+    .api-dashboard-wrap {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .api-header-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .api-header-info {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .api-header-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, rgba(2, 132, 199, 0.12), rgba(14, 165, 233, 0.22));
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .api-header-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin: 0 0 4px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .api-header-sub {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .api-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      background: rgba(16, 185, 129, 0.1);
+      color: #059669;
+      border: 1px solid rgba(16, 185, 129, 0.25);
+    }
+
+    [data-theme="dark"] .api-status-badge {
+      background: rgba(16, 185, 129, 0.18);
+      color: #34d399;
+      border-color: rgba(16, 185, 129, 0.4);
+    }
+
+    .api-pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      animation: pulse-green 1.8s infinite;
+    }
+
+    .api-control-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .api-control-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 16px;
+      align-items: flex-end;
+    }
+
+    .api-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .api-stat-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: all var(--transition-fast);
+    }
+
+    .api-stat-card:hover {
+      border-color: var(--accent-border);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .api-stat-icon-box {
+      width: 46px;
+      height: 46px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .api-stat-val {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.2;
+    }
+
+    .api-stat-label {
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    .api-table-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .api-table-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .api-search-input {
+      min-width: 260px;
+      max-width: 380px;
+      height: 38px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      background: var(--bg-base);
+      color: var(--text-main);
+      padding: 0 12px;
+      font-size: 13px;
+    }
+
+    .api-search-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-subtle);
+    }
+
+    .api-data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .api-data-table th {
+      background: var(--bg-surface-elevated);
+      color: var(--text-secondary);
+      font-weight: 600;
+      padding: 11px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+      white-space: nowrap;
+    }
+
+    .api-data-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-main);
+    }
+
+    .api-data-table tr:hover td {
+      background: var(--bg-surface-subtle);
+    }
+
+    .api-progress-bar-wrap {
+      width: 100%;
+      height: 6px;
+      background: var(--border-color);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 6px;
+    }
+
+    .api-progress-bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    .api-pagination {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border-color);
+      flex-wrap: wrap;
+    }
+
     /* ================================================================= */
         /* GovTech Modern Portal & Single Staff Entrance Styles */
     .hero-title-row {
@@ -2547,6 +2792,199 @@
           </div>
         </div>
 
+        <!-- VIEW 4: API & OPEN DATA VIEWER DASHBOARD (ทำงานภายในหน้าเว็บ 100% ไม่เปิดแท็บใหม่) -->
+        <div id="view-api-container">
+          <div class="api-dashboard-wrap">
+            
+            <!-- 1. Header Card -->
+            <div class="api-header-card">
+              <div class="api-header-info">
+                <div class="api-header-icon" id="api-dashboard-icon">
+                  <i data-lucide="activity" style="width: 24px; height: 24px;"></i>
+                </div>
+                <div>
+                  <div class="api-header-title">
+                    <span id="api-dashboard-title">คลังข้อมูลสุขภาพ HDC (กระทรวงสาธารณสุข)</span>
+                    <span class="api-status-badge" id="api-dashboard-badge">
+                      <span class="api-pulse-dot"></span>
+                      <span>MOPH Open Data API</span>
+                    </span>
+                  </div>
+                  <p class="api-header-sub" id="api-dashboard-desc">
+                    ระบบดึงข้อมูลและรายงานสถิติด้านการแพทย์และสุขภาพ เชื่อมต่อตรงกับฐานข้อมูล Open Data กระทรวงสาธารณสุข
+                  </p>
+                </div>
+              </div>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <button type="button" class="btn btn-secondary btn-sm" id="btn-api-export-csv" onclick="exportApiDataToCsv()">
+                  <i data-lucide="download" style="width: 14px; height: 14px;"></i>
+                  <span>ส่งออก CSV</span>
+                </button>
+                <button type="button" class="btn btn-secondary btn-sm" onclick="window.print()">
+                  <i data-lucide="printer" style="width: 14px; height: 14px;"></i>
+                  <span>พิมพ์รายงาน</span>
+                </button>
+                <button type="button" class="btn btn-primary btn-sm" id="btn-api-refresh-top" onclick="fetchCurrentApiData(true)">
+                  <i data-lucide="rotate-cw" style="width: 14px; height: 14px;"></i>
+                  <span>ดึงข้อมูลล่าสุด</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- 2. Controls & Filter Card -->
+            <div class="api-control-card">
+              <div style="font-weight: 600; font-size: 14px; color: var(--text-main); margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+                <i data-lucide="filter" style="width: 16px; height: 16px; color: var(--accent);"></i>
+                <span>เงื่อนไขการดึงข้อมูลรายงาน (Report Parameters)</span>
+              </div>
+              <div class="api-control-grid">
+                <div class="form-group" style="margin-bottom: 0;">
+                  <label class="form-label" for="api-cat-select">1. หมวดหมู่รายงาน (Category)</label>
+                  <select id="api-cat-select" class="form-select" onchange="handleApiCategoryChange(this.value)">
+                    <option value="">กำลังโหลดหมวดหมู่จาก MOPH API...</option>
+                  </select>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 0;">
+                  <label class="form-label" for="api-report-select">2. รายงานสุขภาพ (Report)</label>
+                  <select id="api-report-select" class="form-select" onchange="handleApiReportChange(this.value)">
+                    <option value="">เลือกหมวดหมู่ก่อน...</option>
+                  </select>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 0;">
+                  <label class="form-label" for="api-year-select">3. ข้อมูลตามปีงบประมาณ</label>
+                  <select id="api-year-select" class="form-select" onchange="fetchCurrentApiData(true)">
+                    <option value="2568">2568</option>
+                    <option value="2567" selected>2567</option>
+                    <option value="2566">2566</option>
+                    <option value="2565">2565</option>
+                    <option value="2564">2564</option>
+                  </select>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 0;">
+                  <label class="form-label" for="api-area-select">4. ขอบเขตพื้นที่</label>
+                  <select id="api-area-select" class="form-select" onchange="handleApiAreaChange(this.value)">
+                    <option value="16" selected>🏛️ เฉพาะจังหวัดลพบุรี (รหัส 16)</option>
+                    <option value="all">🇹🇭 ทั่วประเทศ (ภาพรวม)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <button type="button" class="btn btn-primary" id="btn-api-fetch-action" onclick="fetchCurrentApiData(true)" style="width: 100%; height: 42px;">
+                    <i data-lucide="search" style="width: 16px; height: 16px;"></i>
+                    <span>ค้นหา & ดึงข้อมูล</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. Stat Summary Metrics (4 Cards) -->
+            <div class="api-stats-grid">
+              <div class="api-stat-card">
+                <div class="api-stat-icon-box" style="background: rgba(2, 132, 199, 0.12); color: #0284c7;">
+                  <i data-lucide="building-2" style="width: 22px; height: 22px;"></i>
+                </div>
+                <div>
+                  <div class="api-stat-val" id="stat-api-units">0</div>
+                  <div class="api-stat-label">หน่วยบริการที่รายงาน (แห่ง)</div>
+                </div>
+              </div>
+
+              <div class="api-stat-card">
+                <div class="api-stat-icon-box" style="background: rgba(139, 92, 246, 0.12); color: #8b5cf6;">
+                  <i data-lucide="users" style="width: 22px; height: 22px;"></i>
+                </div>
+                <div>
+                  <div class="api-stat-val" id="stat-api-target">0</div>
+                  <div class="api-stat-label">กลุ่มเป้าหมายรวม (คน/ครั้ง)</div>
+                </div>
+              </div>
+
+              <div class="api-stat-card">
+                <div class="api-stat-icon-box" style="background: rgba(16, 185, 129, 0.12); color: #10b981;">
+                  <i data-lucide="check-circle-2" style="width: 22px; height: 22px;"></i>
+                </div>
+                <div>
+                  <div class="api-stat-val" id="stat-api-result">0</div>
+                  <div class="api-stat-label">ผลงานที่ตรวจ/ควบคุมได้ (คน/ครั้ง)</div>
+                </div>
+              </div>
+
+              <div class="api-stat-card">
+                <div class="api-stat-icon-box" style="background: rgba(245, 158, 11, 0.12); color: #f59e0b;">
+                  <i data-lucide="percent" style="width: 22px; height: 22px;"></i>
+                </div>
+                <div style="flex: 1;">
+                  <div class="api-stat-val" id="stat-api-rate">0.0%</div>
+                  <div class="api-stat-label">อัตราความสำเร็จเฉลี่ย</div>
+                  <div class="api-progress-bar-wrap">
+                    <div class="api-progress-bar-fill" id="stat-api-rate-bar" style="width: 0%;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4. Interactive Data Table Card -->
+            <div class="api-table-card">
+              <div class="api-table-header">
+                <div>
+                  <div style="font-weight: 700; font-size: 15px; color: var(--text-main);" id="api-table-report-name">
+                    ตารางข้อมูลรายงานสถิติ
+                  </div>
+                  <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;" id="api-table-source-info">
+                    ตารางฐานข้อมูล: -
+                  </div>
+                </div>
+                <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                  <input type="text" id="api-table-search-input" class="api-search-input" placeholder="🔍 ค้นหารหัสหน่วยบริการ, พื้นที่..." oninput="handleApiTableSearch(this.value)">
+                  <span class="app-card-badge" id="api-table-count-badge">พบ 0 รายการ</span>
+                </div>
+              </div>
+
+              <div style="overflow-x: auto; max-height: 520px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                <table class="api-data-table">
+                  <thead>
+                    <tr id="api-data-table-thead-tr">
+                      <th style="width: 50px;">#</th>
+                      <th>รหัสหน่วยบริการ (hospcode)</th>
+                      <th>รหัสพื้นที่ (areacode)</th>
+                      <th>ปีงบประมาณ</th>
+                      <th style="text-align: right;">เป้าหมาย (Target)</th>
+                      <th style="text-align: right;">ผลงาน (Result)</th>
+                      <th style="text-align: right;">ร้อยละ (%)</th>
+                      <th>วันที่ประมวลผล</th>
+                    </tr>
+                  </thead>
+                  <tbody id="api-data-table-tbody">
+                    <!-- Populated by JS -->
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Pagination Controls -->
+              <div class="api-pagination">
+                <div style="font-size: 13px; color: var(--text-secondary);" id="api-pagination-info">
+                  แสดง 0 ถึง 0 จาก 0 รายการ
+                </div>
+                <div style="display: flex; gap: 6px;">
+                  <button type="button" class="btn btn-secondary btn-sm" id="btn-api-page-prev" onclick="changeApiPage(-1)">
+                    <i data-lucide="chevron-left" style="width: 14px; height: 14px;"></i>
+                    <span>ก่อนหน้า</span>
+                  </button>
+                  <span id="api-current-page-num" style="display: flex; align-items: center; padding: 0 12px; font-size: 13px; font-weight: 600; background: var(--bg-surface-elevated); border-radius: var(--radius-sm); border: 1px solid var(--border-color);">1</span>
+                  <button type="button" class="btn btn-secondary btn-sm" id="btn-api-page-next" onclick="changeApiPage(1)">
+                    <span>ถัดไป</span>
+                    <i data-lucide="chevron-right" style="width: 14px; height: 14px;"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
         <!-- VIEW 3: ADMIN CONTROL PANEL -->
         <div id="view-admin">
           <div class="admin-container">
@@ -3026,11 +3464,34 @@ function sendToPortal(action, payload) {
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="app-form-openmode">รูปแบบการเปิดแอป</label>
-              <select id="app-form-openmode" class="form-select">
-                <option value="iframe">เปิดในหน้าเว็บนี้ (Iframe Tab Cache)</option>
-                <option value="newtab">เปิดในแท็บใหม่ของเบราว์เซอร์ (New Tab)</option>
+              <label class="form-label" for="app-form-openmode">รูปแบบการเปิดแอป *</label>
+              <select id="app-form-openmode" class="form-select" onchange="toggleApiSettingsInAppForm(this.value)">
+                <option value="iframe">เปิดในหน้าเว็บนี้ (Iframe Tab Cache - รองรับ Google Apps Script)</option>
+                <option value="newtab">เปิดในแท็บใหม่ของเบราว์เซอร์ (New Tab - สำหรับเว็บภายนอก)</option>
+                <option value="api_viewer">ดึงข้อมูล API แสดงผลในพอร์ทัล (API & Open Data Dashboard)</option>
               </select>
+            </div>
+
+            <!-- API Specific Settings (Visible only when openMode === 'api_viewer') -->
+            <div id="app-form-api-settings" class="form-group full-width" style="display: none; background: var(--bg-surface-elevated); border: 1px solid var(--accent-border); border-radius: var(--radius-md); padding: 14px 16px; margin-top: 4px;">
+              <div style="font-weight: 600; font-size: 13.5px; color: var(--accent); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                <i data-lucide="database" style="width: 16px; height: 16px;"></i>
+                <span>การตั้งค่าเชื่อมต่อ API & Open Data Viewer</span>
+              </div>
+              <div class="form-grid" style="grid-template-columns: 1fr 1fr; gap: 12px;">
+                <div class="form-group">
+                  <label class="form-label" for="app-form-apitype">ประเภทบริการข้อมูล (API Service Type)</label>
+                  <select id="app-form-apitype" class="form-select">
+                    <option value="moph_hdc">MOPH Open Data (คลังข้อมูลสุขภาพ HDC สธ.)</option>
+                    <option value="generic_json">REST API ทั่วไป (Generic JSON Array)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="app-form-apiarea">รหัสพื้นที่เริ่มต้น (Area Filter)</label>
+                  <input type="text" id="app-form-apiarea" class="form-input" placeholder="16 (จ.ลพบุรี) หรือ all สำหรับดูทั่วประเทศ" value="16">
+                  <span class="form-help">เช่น <code>16</code> สำหรับจังหวัดลพบุรี หรือ <code>all</code> ทั่วประเทศ</span>
+                </div>
+              </div>
             </div>
 
             <div class="form-group full-width">
@@ -3071,8 +3532,9 @@ function sendToPortal(action, payload) {
         <div class="modal-title">ทดสอบการเปิด URL (Preview Test)</div>
         <button class="modal-close-btn" id="btn-close-test-modal" aria-label="ปิด"><i data-lucide="x"></i></button>
       </div>
-      <div class="modal-body" style="padding: 0; position: relative; flex: 1;">
+      <div class="modal-body" style="padding: 0; position: relative; flex: 1; overflow: hidden;">
         <iframe id="test-preview-iframe" style="width: 100%; height: 100%; border: none; background: white;" allow="clipboard-write; fullscreen"></iframe>
+        <div id="test-preview-api-box" style="display: none; width: 100%; height: 100%; overflow: auto; background: var(--bg-surface);"></div>
       </div>
       <div class="modal-footer" style="justify-content: space-between;">
         <span style="font-size: 12px; color: var(--text-muted);" id="test-preview-status">กำลังโหลด...</span>
@@ -3186,6 +3648,20 @@ function getSuggestedIcon(name) {
         "บริการประชาชนและสารสนเทศ"
       ],
       apps: [
+              {
+                      "id": "app-moph-hdc",
+                      "name": "คลังข้อมูลสุขภาพ HDC (กระทรวงสาธารณสุข)",
+                      "url": "https://opendata.moph.go.th/api",
+                      "category": "บริการประชาชนและสารสนเทศ",
+                      "icon": "activity",
+                      "badge": "Open Data",
+                      "openMode": "api_viewer",
+                      "apiType": "moph_hdc",
+                      "apiArea": "16",
+                      "description": "รายงานข้อมูลสถิติสุขภาพ HDC กระทรวงสาธารณสุข เชื่อมโยงและดึงข้อมูลสดผ่าน MOPH Open Data API",
+                      "visible": true,
+                      "order": 1
+              },
               {
                       "id": "app-1788934620831",
                       "name": "ศูนย์ข้อมูลบริหารเชิงพื้นที่ GIS",
@@ -3319,6 +3795,26 @@ function getSuggestedIcon(name) {
             }
           }
         });
+
+        // ตรวจสอบและเพิ่มระบบคลังข้อมูลสุขภาพ HDC อัตโนมัติหากยังไม่มีในรายการ
+        const hasMoph = appConfig.apps.some(a => a.id === 'app-moph-hdc' || (a.url && a.url.includes('opendata.moph.go.th')));
+        if (!hasMoph) {
+          appConfig.apps.unshift({
+            "id": "app-moph-hdc",
+            "name": "คลังข้อมูลสุขภาพ HDC (กระทรวงสาธารณสุข)",
+            "url": "https://opendata.moph.go.th/api",
+            "category": "บริการประชาชนและสารสนเทศ",
+            "icon": "activity",
+            "badge": "Open Data",
+            "openMode": "api_viewer",
+            "apiType": "moph_hdc",
+            "apiArea": "16",
+            "description": "รายงานข้อมูลสถิติด้านการแพทย์และสุขภาพ HDC กระทรวงสาธารณสุข เชื่อมโยงและดึงข้อมูลสดผ่าน MOPH Open Data API",
+            "visible": true,
+            "order": 1
+          });
+          saveConfig(false);
+        }
       }
 
       if (appConfig.adminPasswordHash === "ac9689e2272427085e35b9d3e3e8bed88cb3434828b43b86fc0596cad4c6e270" || 
@@ -3658,6 +4154,9 @@ function getSuggestedIcon(name) {
       
       document.getElementById('view-home').style.display = 'flex';
       document.getElementById('view-iframe-container').style.display = 'none';
+      if (document.getElementById('view-api-container')) {
+        document.getElementById('view-api-container').style.display = 'none';
+      }
       document.getElementById('view-admin').style.display = 'none';
 
       document.getElementById('breadcrumb-title').textContent = 'แดชบอร์ดรวมแอป';
@@ -3681,17 +4180,41 @@ function getSuggestedIcon(name) {
         return;
       }
 
+      // โหมด 2: เปิดแท็บใหม่
       if (app.openMode === 'newtab') {
         window.open(app.url, '_blank');
         window.location.hash = '#/home';
         return;
       }
 
+      // โหมด 3: ดึงข้อมูล API แสดงผลในพอร์ทัล
+      if (app.openMode === 'api_viewer') {
+        currentRoute = { view: 'api', id: appId };
+        document.title = `${app.name} | ${appConfig.portalName}`;
+
+        document.getElementById('view-home').style.display = 'none';
+        document.getElementById('view-iframe-container').style.display = 'none';
+        document.getElementById('view-admin').style.display = 'none';
+        const apiView = document.getElementById('view-api-container');
+        if (apiView) apiView.style.display = 'block';
+
+        document.getElementById('breadcrumb-title').textContent = `${app.category} > ${app.name}`;
+        updateSidebarActiveItem(appId);
+        setProgressBar(false);
+
+        loadApiViewerApp(app);
+        return;
+      }
+
+      // โหมด 1: Iframe Tab Cache
       currentRoute = { view: 'app', id: appId };
       document.title = `${app.name} | ${appConfig.portalName}`;
 
       document.getElementById('view-home').style.display = 'none';
       document.getElementById('view-iframe-container').style.display = 'block';
+      if (document.getElementById('view-api-container')) {
+        document.getElementById('view-api-container').style.display = 'none';
+      }
       document.getElementById('view-admin').style.display = 'none';
 
       document.getElementById('breadcrumb-title').textContent = `${app.category} > ${app.name}`;
@@ -3712,6 +4235,9 @@ function getSuggestedIcon(name) {
 
       document.getElementById('view-home').style.display = 'none';
       document.getElementById('view-iframe-container').style.display = 'none';
+      if (document.getElementById('view-api-container')) {
+        document.getElementById('view-api-container').style.display = 'none';
+      }
       document.getElementById('view-admin').style.display = 'block';
 
       document.getElementById('breadcrumb-title').textContent = 'แผงควบคุมผู้ดูแลระบบ';
@@ -3884,6 +4410,10 @@ function getSuggestedIcon(name) {
     }
 
     function reloadCurrentIframe() {
+      if (currentRoute.view === 'api') {
+        fetchCurrentApiData(true);
+        return;
+      }
       if (currentRoute.view !== 'app' || !currentRoute.id) return;
       const appId = currentRoute.id;
       const entry = iframeCache.get(appId);
@@ -4231,11 +4761,11 @@ function getSuggestedIcon(name) {
 
               <div class="app-card-footer">
                 <div class="app-card-open-label">
-                  <span>${app.openMode === 'newtab' ? 'เปิดแท็บใหม่' : 'เข้าใช้งานระบบ'}</span>
-                  <i data-lucide="${app.openMode === 'newtab' ? 'external-link' : 'arrow-right'}" style="width: 14px; height: 14px;"></i>
+                  <span>${app.openMode === 'newtab' ? 'เปิดแท็บใหม่' : (app.openMode === 'api_viewer' ? 'ดูข้อมูล API สด' : 'เข้าใช้งานระบบ')}</span>
+                  <i data-lucide="${app.openMode === 'newtab' ? 'external-link' : (app.openMode === 'api_viewer' ? 'activity' : 'arrow-right')}" style="width: 14px; height: 14px;"></i>
                 </div>
-                <button class="app-card-ext-btn" title="เปิดในแท็บใหม่" onclick="event.stopPropagation(); window.open('${app.url}', '_blank');">
-                  <i data-lucide="external-link" style="width: 15px; height: 15px;"></i>
+                <button class="app-card-ext-btn" title="${app.openMode === 'api_viewer' ? 'เปิดดูข้อมูล API' : (app.openMode === 'newtab' ? 'เปิดในแท็บใหม่' : 'เปิดในแท็บใหม่')}" onclick="event.stopPropagation(); ${app.openMode === 'api_viewer' ? `window.location.hash = '#/app/${app.id}';` : `window.open('${app.url}', '_blank');`}">
+                  <i data-lucide="${app.openMode === 'api_viewer' ? 'database' : 'external-link'}" style="width: 15px; height: 15px;"></i>
                 </button>
               </div>
             `;
@@ -4397,7 +4927,7 @@ function getSuggestedIcon(name) {
           <td><span class="app-card-badge">${app.category}</span></td>
           <td>
             <span style="font-size: 11.5px; color: var(--text-secondary);">
-              ${app.openMode === 'newtab' ? '🔗 แท็บใหม่' : '🖼️ Iframe'}
+              ${app.openMode === 'newtab' ? '🔗 แท็บใหม่' : (app.openMode === 'api_viewer' ? '⚡ API สด' : '🖼️ Iframe')}
             </span>
           </td>
           <td>
@@ -4408,7 +4938,7 @@ function getSuggestedIcon(name) {
           </td>
           <td style="text-align: right;">
             <div class="app-table-actions" style="justify-content: flex-end;">
-              <button class="table-btn" onclick="testAppUrl('${app.url}')" title="ทดสอบ URL">
+              <button class="table-btn" onclick="testAppUrl('${app.url}', '${app.openMode}')" title="ทดสอบ URL">
                 <i data-lucide="play" style="width: 12px; height: 12px;"></i>
               </button>
               <button class="table-btn" onclick="openEditAppModal('${app.id}')" title="แก้ไข">
@@ -4628,11 +5158,26 @@ function getSuggestedIcon(name) {
       }
     }
 
+    function toggleApiSettingsInAppForm(mode) {
+      const apiSettings = document.getElementById('app-form-api-settings');
+      if (apiSettings) {
+        apiSettings.style.display = (mode === 'api_viewer') ? 'block' : 'none';
+        refreshLucideIcons();
+      }
+    }
+
     function openAddAppModal() {
       document.getElementById('modal-app-form-title').textContent = 'เพิ่มแอปพลิเคชันใหม่';
       document.getElementById('form-app-crud').reset();
       document.getElementById('app-form-id').value = '';
       document.getElementById('app-form-openmode').value = 'iframe';
+      toggleApiSettingsInAppForm('iframe');
+      if (document.getElementById('app-form-apitype')) {
+        document.getElementById('app-form-apitype').value = 'moph_hdc';
+      }
+      if (document.getElementById('app-form-apiarea')) {
+        document.getElementById('app-form-apiarea').value = '16';
+      }
       document.getElementById('app-form-visible').checked = true;
 
       populateCategoryDatalist();
@@ -4653,6 +5198,13 @@ function getSuggestedIcon(name) {
       document.getElementById('app-form-icon').value = app.icon || 'layout-grid';
       document.getElementById('app-form-badge').value = app.badge || '';
       document.getElementById('app-form-openmode').value = app.openMode || 'iframe';
+      toggleApiSettingsInAppForm(app.openMode || 'iframe');
+      if (document.getElementById('app-form-apitype')) {
+        document.getElementById('app-form-apitype').value = app.apiType || 'moph_hdc';
+      }
+      if (document.getElementById('app-form-apiarea')) {
+        document.getElementById('app-form-apiarea').value = app.apiArea !== undefined ? app.apiArea : '16';
+      }
       document.getElementById('app-form-desc').value = app.description || '';
       document.getElementById('app-form-visible').checked = app.visible !== false;
 
@@ -4689,6 +5241,8 @@ function getSuggestedIcon(name) {
       const icon = document.getElementById('app-form-icon').value.trim() || 'layout-grid';
       const badge = document.getElementById('app-form-badge').value.trim();
       const openMode = document.getElementById('app-form-openmode').value;
+      const apiType = document.getElementById('app-form-apitype')?.value || 'moph_hdc';
+      const apiArea = document.getElementById('app-form-apiarea')?.value.trim() ?? '16';
       const desc = document.getElementById('app-form-desc').value.trim();
       const visible = document.getElementById('app-form-visible').checked;
 
@@ -4702,6 +5256,8 @@ function getSuggestedIcon(name) {
         icon: icon,
         badge: badge,
         openMode: openMode,
+        apiType: apiType,
+        apiArea: apiArea,
         description: desc,
         visible: visible,
         order: existingIndex >= 0 ? appConfig.apps[existingIndex].order : appConfig.apps.length + 1
@@ -4753,21 +5309,81 @@ function getSuggestedIcon(name) {
       }
     }
 
-    function testAppUrl(url) {
+    async function testAppUrl(url, mode) {
       if (!url) {
         showToast("กรุณาระบุ URL ที่ต้องการทดสอบ", "error");
         return;
       }
       const modal = document.getElementById('modal-test-preview');
       const iframe = document.getElementById('test-preview-iframe');
+      const apiBox = document.getElementById('test-preview-api-box');
       const status = document.getElementById('test-preview-status');
       
+      const currentMode = mode || document.getElementById('app-form-openmode')?.value || 'iframe';
+
+      if (currentMode === 'api_viewer' || url.includes('opendata.moph.go.th') || url.includes('/api')) {
+        iframe.style.display = 'none';
+        if (apiBox) {
+          apiBox.style.display = 'block';
+          apiBox.innerHTML = '<div style="padding: 30px; text-align: center; color: var(--text-muted);"><div class="skeleton-spinner-ring" style="margin: 0 auto 12px;"></div>กำลังเชื่อมต่อไปยัง API เพื่อทดสอบข้อมูล...</div>';
+        }
+        status.textContent = 'กำลังเชื่อมต่อและทดสอบยิง API...';
+        modal.classList.add('active');
+
+        try {
+          let testEndpoint = url;
+          if (url.includes('opendata.moph.go.th')) {
+            testEndpoint = 'https://opendata.moph.go.th/api/category';
+          }
+          const t0 = performance.now();
+          const res = await fetch(testEndpoint);
+          const t1 = performance.now();
+          const latency = Math.round(t1 - t0);
+
+          if (res.ok) {
+            const data = await res.json();
+            const itemCount = Array.isArray(data) ? data.length : (data.data ? data.data.length : Object.keys(data).length);
+            status.innerHTML = `<span style="color:#10b981;font-weight:600;">✅ เชื่อมต่อ API สำเร็จ (HTTP ${res.status} OK - ${latency}ms)</span>`;
+            if (apiBox) {
+              apiBox.innerHTML = `
+                <div style="padding: 24px; font-family: inherit; color: var(--text-main);">
+                  <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 16px; margin-bottom: 16px;">
+                    <div style="font-weight: 700; color: #059669; font-size: 15px; margin-bottom: 4px;">🎉 การเชื่อมต่อ API ทำงานได้สมบูรณ์แบบ 100%!</div>
+                    <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
+                      • ปลายทางที่ทดสอบ: <code>${testEndpoint}</code><br>
+                      • สถานะตอบกลับ: HTTP ${res.status} ${res.statusText} (${latency} ms)<br>
+                      • จำนวนข้อมูลที่พบ: <strong>${itemCount}</strong> รายการ<br>
+                      • โหมดแสดงผล: <strong>API & Open Data Dashboard (ภายในพอร์ทัล ไม่เปิดแท็บใหม่)</strong>
+                    </div>
+                  </div>
+                  <div style="font-size: 12.5px; font-weight: 600; margin-bottom: 6px; color: var(--text-secondary);">ตัวอย่างข้อมูลดิบ JSON ที่ดึงได้:</div>
+                  <pre style="background: var(--bg-surface-elevated); border: 1px solid var(--border-color); border-radius: 8px; padding: 12px; font-size: 11.5px; max-height: 280px; overflow: auto; color: var(--text-main); font-family: monospace;">${escapeHtml(JSON.stringify(Array.isArray(data) ? data.slice(0, 3) : data, null, 2))}</pre>
+                </div>
+              `;
+            }
+          } else {
+            status.innerHTML = `<span style="color:#ef4444;font-weight:600;">⚠️ เซิร์ฟเวอร์ตอบกลับรหัส ${res.status}</span>`;
+            if (apiBox) {
+              apiBox.innerHTML = `<div style="padding: 24px; color: #ef4444;">ไม่สามารถเชื่อมต่อได้: HTTP ${res.status} ${res.statusText}</div>`;
+            }
+          }
+        } catch (err) {
+          status.innerHTML = `<span style="color:#ef4444;font-weight:600;">❌ ข้อผิดพลาด: ${err.message}</span>`;
+          if (apiBox) {
+            apiBox.innerHTML = `<div style="padding: 24px; color: #ef4444;">เกิดข้อผิดพลาดในการเชื่อมต่อ: ${err.message}</div>`;
+          }
+        }
+        return;
+      }
+
+      if (apiBox) apiBox.style.display = 'none';
+      iframe.style.display = 'block';
       status.textContent = 'กำลังโหลดหน้าเว็บเพื่อทดสอบ...';
       iframe.src = url;
       modal.classList.add('active');
 
       iframe.onload = () => {
-        status.textContent = 'โหลดสำเร็จ! (หากหน้าว่างเปล่า อาจติด X-Frame-Options ALLOWALL)';
+        status.innerHTML = 'โหลดสำเร็จ! (หากหน้าว่างเปล่า อาจติด X-Frame-Options แนะนำให้เลือกโหมด "เปิดแท็บใหม่" หรือ "API Viewer")';
       };
     }
 
@@ -5008,7 +5624,7 @@ function getSuggestedIcon(name) {
 
       document.getElementById('btn-reload-frame')?.addEventListener('click', reloadCurrentIframe);
       document.getElementById('btn-open-newtab')?.addEventListener('click', () => {
-        if (currentRoute.view === 'app' && currentRoute.id) {
+        if ((currentRoute.view === 'app' || currentRoute.view === 'api') && currentRoute.id) {
           const app = appConfig.apps.find(a => a.id === currentRoute.id);
           if (app) window.open(app.url, '_blank');
         } else {
@@ -5090,7 +5706,8 @@ function getSuggestedIcon(name) {
 
       document.getElementById('btn-test-url-in-form')?.addEventListener('click', () => {
         const url = document.getElementById('app-form-url').value.trim();
-        testAppUrl(url);
+        const mode = document.getElementById('app-form-openmode')?.value || 'iframe';
+        testAppUrl(url, mode);
       });
 
       document.getElementById('btn-close-test-modal')?.addEventListener('click', () => {
@@ -5111,7 +5728,346 @@ function getSuggestedIcon(name) {
         document.getElementById('setting-portal-logo').value = SMART_LOPPAO_MODERN_LOGO_BASE64;
         showToast('เลือกโลโก้ Smart loppao (โมเดิร์น) เรียบร้อย');
       });
-      // Category & Icon picker event listeners
+  
+    // =================================================================
+    // 14. UNIVERSAL API & OPEN DATA VIEWER MODULE
+    // ระบบเชื่อมต่อและแสดงผล API ข้อมูลเปิด (เช่น MOPH HDC สธ.) ในตัวพอร์ทัล
+    // =================================================================
+    let currentApiApp = null;
+    let mophCategoriesCache = null;
+    let currentMophReports = [];
+    let currentApiRawData = [];
+    let currentApiFilteredData = [];
+    let currentApiPage = 1;
+    const API_PAGE_SIZE = 25;
+
+    async function loadApiViewerApp(app) {
+      currentApiApp = app;
+      const titleEl = document.getElementById('api-dashboard-title');
+      const descEl = document.getElementById('api-dashboard-desc');
+      const iconEl = document.getElementById('api-dashboard-icon');
+
+      if (titleEl) titleEl.textContent = app.name || 'คลังข้อมูลสุขภาพ HDC (กระทรวงสาธารณสุข)';
+      if (descEl) descEl.textContent = app.description || 'ระบบดึงข้อมูลและรายงานสถิติด้านการแพทย์และสุขภาพ เชื่อมต่อตรงกับฐานข้อมูล Open Data กระทรวงสาธารณสุข';
+      if (iconEl) iconEl.innerHTML = `<i data-lucide="${getAppIcon(app)}" style="width: 24px; height: 24px;"></i>`;
+
+      const areaSelect = document.getElementById('api-area-select');
+      if (areaSelect && app.apiArea) {
+        areaSelect.value = app.apiArea;
+      }
+
+      refreshLucideIcons();
+      await initMophDashboard(app);
+    }
+
+    async function initMophDashboard(app) {
+      const catSelect = document.getElementById('api-cat-select');
+      if (!catSelect) return;
+
+      if (!mophCategoriesCache) {
+        catSelect.innerHTML = '<option value="">กำลังเชื่อมต่อ MOPH Open Data API...</option>';
+        try {
+          const res = await fetch('https://opendata.moph.go.th/api/category');
+          if (res.ok) {
+            mophCategoriesCache = await res.json();
+          } else {
+            throw new Error('HTTP ' + res.status);
+          }
+        } catch (err) {
+          console.error('Error fetching MOPH categories:', err);
+          showToast('ไม่สามารถเชื่อมต่อ MOPH API: ' + err.message, 'error');
+          catSelect.innerHTML = '<option value="">เชื่อมต่อ API ไม่สำเร็จ กรุณากดลองใหม่</option>';
+          return;
+        }
+      }
+
+      // เรนเดอร์ตัวเลือกหมวดหมู่ 43 หมวด
+      catSelect.innerHTML = mophCategoriesCache.map(cat => 
+        `<option value="${cat.cat_id}">${cat.category_name} (${cat.report_total} รายงาน)</option>`
+      ).join('');
+
+      // เลือกหมวดที่น่าสนใจเป็นค่าเริ่มต้น (เช่น การเฝ้าระวัง หรือหมวดแรก)
+      const defaultCat = mophCategoriesCache.find(c => c.category_name.includes('การเฝ้าระวัง')) || mophCategoriesCache[0];
+      if (defaultCat) {
+        catSelect.value = defaultCat.cat_id;
+        await handleApiCategoryChange(defaultCat.cat_id);
+      }
+    }
+
+    async function handleApiCategoryChange(catId) {
+      const reportSelect = document.getElementById('api-report-select');
+      if (!reportSelect || !catId) return;
+
+      reportSelect.innerHTML = '<option value="">กำลังโหลดรายการรายงาน...</option>';
+
+      try {
+        const res = await fetch(`https://opendata.moph.go.th/api/report/${catId}`);
+        if (res.ok) {
+          currentMophReports = await res.json();
+          if (Array.isArray(currentMophReports) && currentMophReports.length > 0) {
+            reportSelect.innerHTML = currentMophReports.map(r => 
+              `<option value="${r.source_table}" data-report-name="${escapeHtml(r.report_name)}">${r.report_name}</option>`
+            ).join('');
+            
+            // เลือกรายงานตัวแรกแล้วดึงข้อมูลอัตโนมัติ
+            await handleApiReportChange(currentMophReports[0].source_table);
+          } else {
+            reportSelect.innerHTML = '<option value="">ไม่พบรายงานในหมวดนี้</option>';
+          }
+        }
+      } catch (err) {
+        console.error('Error fetching MOPH reports:', err);
+        reportSelect.innerHTML = '<option value="">เกิดข้อผิดพลาดในการโหลดรายงาน</option>';
+      }
+    }
+
+    async function handleApiReportChange(sourceTable) {
+      const reportSelect = document.getElementById('api-report-select');
+      const selectedOpt = reportSelect.options[reportSelect.selectedIndex];
+      const reportName = selectedOpt ? selectedOpt.getAttribute('data-report-name') : sourceTable;
+
+      const reportTitleEl = document.getElementById('api-table-report-name');
+      const reportSourceEl = document.getElementById('api-table-source-info');
+      if (reportTitleEl) reportTitleEl.textContent = reportName || 'รายงานสถิติ';
+      if (reportSourceEl) reportSourceEl.textContent = `ตารางฐานข้อมูล: ${sourceTable}`;
+
+      await fetchCurrentApiData(false);
+    }
+
+    function handleApiAreaChange(val) {
+      filterAndRenderApiData();
+    }
+
+    async function fetchCurrentApiData(forceRefresh = false) {
+      const reportSelect = document.getElementById('api-report-select');
+      const yearSelect = document.getElementById('api-year-select');
+      const tbody = document.getElementById('api-data-table-tbody');
+
+      const tableName = reportSelect ? reportSelect.value : 's_dm_control';
+      const year = yearSelect ? parseInt(yearSelect.value, 10) : 2567;
+
+      if (!tableName) {
+        showToast('กรุณาเลือกรายงานที่ต้องการดึงข้อมูล', 'info');
+        return;
+      }
+
+      if (tbody) {
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; padding: 40px; color: var(--text-muted);"><div class="skeleton-spinner-ring" style="margin: 0 auto 12px;"></div>กำลังดึงข้อมูลสถิติจริงจาก MOPH Open Data API...</td></tr>';
+      }
+
+      try {
+        setProgressBar(true);
+        const res = await fetch('https://opendata.moph.go.th/api/report_data', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            tableName: tableName,
+            year: year,
+            limit: 1000,
+            offset: 0
+          })
+        });
+
+        if (res.ok) {
+          const json = await res.json();
+          currentApiRawData = Array.isArray(json.data) ? json.data : (Array.isArray(json) ? json : []);
+          currentApiPage = 1;
+          filterAndRenderApiData();
+          if (forceRefresh) showToast(`ดึงข้อมูล ${tableName} ปี ${year} สำเร็จแล้ว (${currentApiRawData.length} แถว)`, 'success');
+        } else {
+          throw new Error('HTTP ' + res.status);
+        }
+      } catch (err) {
+        console.error('Error fetching report data:', err);
+        showToast('ไม่สามารถดึงข้อมูลจาก MOPH API ได้: ' + err.message, 'error');
+        if (tbody) {
+          tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; padding: 30px; color: #ef4444;">ไม่สามารถดึงข้อมูลได้: ${err.message}</td></tr>`;
+        }
+      } finally {
+        setProgressBar(false);
+      }
+    }
+
+    function filterAndRenderApiData() {
+      const areaSelect = document.getElementById('api-area-select');
+      const searchInput = document.getElementById('api-table-search-input');
+      const areaVal = areaSelect ? areaSelect.value : '16';
+      const query = searchInput ? searchInput.value.trim().toLowerCase() : '';
+
+      // 1. กรองตามพื้นที่
+      let list = currentApiRawData;
+      if (areaVal && areaVal !== 'all') {
+        list = list.filter(item => {
+          const code = String(item.areacode || '');
+          return code.startsWith(areaVal);
+        });
+      }
+
+      // 2. กรองตามคำค้นหา
+      if (query) {
+        list = list.filter(item => {
+          return String(item.hospcode || '').toLowerCase().includes(query) ||
+                 String(item.areacode || '').toLowerCase().includes(query) ||
+                 String(item.b_year || '').toLowerCase().includes(query) ||
+                 String(item.date_com || '').toLowerCase().includes(query);
+        });
+      }
+
+      currentApiFilteredData = list;
+      renderApiStats(list);
+      renderApiTable();
+    }
+
+    function renderApiStats(list) {
+      const unitsEl = document.getElementById('stat-api-units');
+      const targetEl = document.getElementById('stat-api-target');
+      const resultEl = document.getElementById('stat-api-result');
+      const rateEl = document.getElementById('stat-api-rate');
+      const rateBar = document.getElementById('stat-api-rate-bar');
+
+      const unitsCount = list.length;
+      let totalTarget = 0;
+      let totalResult = 0;
+
+      list.forEach(item => {
+        totalTarget += Number(item.target || 0);
+        totalResult += Number(item.result || 0);
+      });
+
+      const rate = totalTarget > 0 ? ((totalResult / totalTarget) * 100).toFixed(1) : '0.0';
+
+      if (unitsEl) unitsEl.textContent = unitsCount.toLocaleString('th-TH');
+      if (targetEl) targetEl.textContent = totalTarget.toLocaleString('th-TH');
+      if (resultEl) resultEl.textContent = totalResult.toLocaleString('th-TH');
+      if (rateEl) rateEl.textContent = rate + '%';
+      if (rateBar) rateBar.style.width = Math.min(Number(rate), 100) + '%';
+    }
+
+    function renderApiTable() {
+      const tbody = document.getElementById('api-data-table-tbody');
+      const countBadge = document.getElementById('api-table-count-badge');
+      const pageInfo = document.getElementById('api-pagination-info');
+      const pageNumEl = document.getElementById('api-current-page-num');
+      const btnPrev = document.getElementById('btn-api-page-prev');
+      const btnNext = document.getElementById('btn-api-page-next');
+
+      if (!tbody) return;
+
+      const totalItems = currentApiFilteredData.length;
+      if (countBadge) countBadge.textContent = `พบ ${totalItems.toLocaleString('th-TH')} รายการ`;
+
+      if (totalItems === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="8" style="text-align: center; padding: 40px; color: var(--text-muted);">
+              <i data-lucide="inbox" style="width: 32px; height: 32px; margin: 0 auto 8px; opacity: 0.5;"></i>
+              <div>ไม่พบข้อมูลตามเงื่อนไขที่เลือก (อาจยังไม่มีการส่งข้อมูลในรหัสพื้นที่นี้ หรือลองเปลี่ยนปีงบประมาณ / เลือก 'ทั่วประเทศ')</div>
+            </td>
+          </tr>
+        `;
+        if (pageInfo) pageInfo.textContent = 'แสดง 0 ถึง 0 จาก 0 รายการ';
+        if (btnPrev) btnPrev.disabled = true;
+        if (btnNext) btnNext.disabled = true;
+        refreshLucideIcons();
+        return;
+      }
+
+      const totalPages = Math.ceil(totalItems / API_PAGE_SIZE) || 1;
+      if (currentApiPage > totalPages) currentApiPage = totalPages;
+      if (currentApiPage < 1) currentApiPage = 1;
+
+      const startIndex = (currentApiPage - 1) * API_PAGE_SIZE;
+      const endIndex = Math.min(startIndex + API_PAGE_SIZE, totalItems);
+      const pageItems = currentApiFilteredData.slice(startIndex, endIndex);
+
+      tbody.innerHTML = pageItems.map((item, idx) => {
+        const itemTarget = Number(item.target || 0);
+        const itemResult = Number(item.result || 0);
+        const itemRate = itemTarget > 0 ? ((itemResult / itemTarget) * 100).toFixed(1) : '-';
+
+        return `
+          <tr>
+            <td style="color: var(--text-muted); font-size: 11.5px;">${startIndex + idx + 1}</td>
+            <td>
+              <div style="font-weight: 600; font-family: monospace; color: var(--accent);">${item.hospcode || '-'}</div>
+            </td>
+            <td>
+              <span style="font-family: monospace; font-size: 12px; background: var(--bg-surface-elevated); padding: 2px 6px; border-radius: 4px;">${item.areacode || '-'}</span>
+            </td>
+            <td>${item.b_year || '-'}</td>
+            <td style="text-align: right; font-weight: 500;">${itemTarget.toLocaleString('th-TH')}</td>
+            <td style="text-align: right; font-weight: 600; color: #059669;">${itemResult.toLocaleString('th-TH')}</td>
+            <td style="text-align: right;">
+              <span style="font-weight: 700; color: ${Number(itemRate) >= 80 ? '#10b981' : (Number(itemRate) >= 50 ? '#f59e0b' : '#ef4444')};">
+                ${itemRate !== '-' ? itemRate + '%' : '-'}
+              </span>
+            </td>
+            <td style="font-size: 11.5px; color: var(--text-muted);">${item.date_com || '-'}</td>
+          </tr>
+        `;
+      }).join('');
+
+      if (pageInfo) pageInfo.textContent = `แสดง ${(startIndex + 1).toLocaleString('th-TH')} ถึง ${endIndex.toLocaleString('th-TH')} จาก ${totalItems.toLocaleString('th-TH')} รายการ`;
+      if (pageNumEl) pageNumEl.textContent = `${currentApiPage} / ${totalPages}`;
+      if (btnPrev) btnPrev.disabled = currentApiPage <= 1;
+      if (btnNext) btnNext.disabled = currentApiPage >= totalPages;
+
+      refreshLucideIcons();
+    }
+
+    function handleApiTableSearch(query) {
+      currentApiPage = 1;
+      filterAndRenderApiData();
+    }
+
+    function changeApiPage(delta) {
+      currentApiPage += delta;
+      renderApiTable();
+    }
+
+    function exportApiDataToCsv() {
+      if (!currentApiFilteredData || currentApiFilteredData.length === 0) {
+        showToast('ไม่มีข้อมูลสำหรับส่งออก CSV', 'info');
+        return;
+      }
+
+      const reportSelect = document.getElementById('api-report-select');
+      const yearSelect = document.getElementById('api-year-select');
+      const reportName = reportSelect ? reportSelect.value : 'report';
+      const year = yearSelect ? yearSelect.value : '2567';
+
+      const headers = ['ลำดับ', 'รหัสหน่วยบริการ (hospcode)', 'รหัสพื้นที่ (areacode)', 'ปีงบประมาณ (b_year)', 'เป้าหมาย (target)', 'ผลงาน (result)', 'ร้อยละ (%)', 'วันที่ประมวลผล (date_com)'];
+      
+      const rows = currentApiFilteredData.map((item, idx) => {
+        const t = Number(item.target || 0);
+        const r = Number(item.result || 0);
+        const rate = t > 0 ? ((r / t) * 100).toFixed(1) : '';
+        return [
+          idx + 1,
+          `"${item.hospcode || ''}"`,
+          `"${item.areacode || ''}"`,
+          item.b_year || '',
+          t,
+          r,
+          rate,
+          `"${item.date_com || ''}"`
+        ].join(',');
+      });
+
+      const csvContent = '\uFEFF' + headers.join(',') + '\n' + rows.join('\n');
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.setAttribute('href', url);
+      link.setAttribute('download', `moph_hdc_${reportName}_${year}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+      showToast('ดาวน์โหลดไฟล์ CSV เรียบร้อยแล้ว', 'success');
+    }
+
+    // Category & Icon picker event listeners
       document.getElementById('form-add-category')?.addEventListener('submit', function(e) {
         e.preventDefault();
         const input = document.getElementById('input-new-category-name');
