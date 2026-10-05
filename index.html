@@ -1412,32 +1412,183 @@
       color: #b45309;
     }
 
+    /* ================================================================= */
+    /* 5.1 THEMATIC DECORATIVE CARD STYLES (20% DECORATIVE PALETTE)      */
+    /* ออกแบบการ์ดใหม่: สวยงาม มีสีสันเฉพาะตัว ไม่ซ้ำซากจำเจ                */
+    /* โทนสี: น้ำเงิน 10% | ฟ้า 40% | ขาว 30% | สีตกแต่ง 20%              */
+    /* ================================================================= */
+
+    /* 6 Thematic Color Schemes (20% Decorative Color Palette) */
+    /* 1. Theme Emerald: สุขภาพ, อนามัย, Open Data, ระบบข้อมูลสด */
+    .app-card.theme-emerald {
+      --theme-color: #059669;
+      --theme-grad: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      --theme-glow: rgba(16, 185, 129, 0.16);
+      --theme-shadow: rgba(16, 185, 129, 0.22);
+      --theme-icon-shadow: rgba(5, 150, 105, 0.38);
+      --theme-border: rgba(16, 185, 129, 0.28);
+      --theme-border-hover: #10b981;
+      --theme-bg-soft: #ecfdf5;
+      --theme-text-tag: #047857;
+      --theme-btn-hover: #059669;
+    }
+
+    /* 2. Theme Amber: ข่าวจัดซื้อจัดจ้าง, พัสดุ, ประกาศ, การเงิน */
+    .app-card.theme-amber {
+      --theme-color: #d97706;
+      --theme-grad: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      --theme-glow: rgba(245, 158, 11, 0.16);
+      --theme-shadow: rgba(245, 158, 11, 0.22);
+      --theme-icon-shadow: rgba(217, 119, 6, 0.38);
+      --theme-border: rgba(245, 158, 11, 0.28);
+      --theme-border-hover: #f59e0b;
+      --theme-bg-soft: #fffbeb;
+      --theme-text-tag: #b45309;
+      --theme-btn-hover: #d97706;
+    }
+
+    /* 3. Theme Purple: GIS, แผนที่, เชิงพื้นที่, สถิติ, วิเคราะห์ */
+    .app-card.theme-purple {
+      --theme-color: #7c3aed;
+      --theme-grad: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+      --theme-glow: rgba(139, 92, 246, 0.16);
+      --theme-shadow: rgba(139, 92, 246, 0.22);
+      --theme-icon-shadow: rgba(124, 58, 237, 0.38);
+      --theme-border: rgba(139, 92, 246, 0.28);
+      --theme-border-hover: #8b5cf6;
+      --theme-bg-soft: #f5f3ff;
+      --theme-text-tag: #6d28d9;
+      --theme-btn-hover: #7c3aed;
+    }
+
+    /* 4. Theme Cyan: น้ำ, สภาพอากาศ, อุทกวิทยา, ทรัพยากร */
+    .app-card.theme-cyan {
+      --theme-color: #0891b2;
+      --theme-grad: linear-gradient(135deg, #06b6d4 0%, #0284c7 100%);
+      --theme-glow: rgba(6, 182, 212, 0.16);
+      --theme-shadow: rgba(6, 182, 212, 0.22);
+      --theme-icon-shadow: rgba(8, 145, 178, 0.38);
+      --theme-border: rgba(6, 182, 212, 0.28);
+      --theme-border-hover: #06b6d4;
+      --theme-bg-soft: #f0fdfa;
+      --theme-text-tag: #0f766e;
+      --theme-btn-hover: #0891b2;
+    }
+
+    /* 5. Theme Rose: ร้องเรียน, ร้องทุกข์, ศูนย์ดำรงธรรม, สวัสดิการสังคม */
+    .app-card.theme-rose {
+      --theme-color: #e11d48;
+      --theme-grad: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
+      --theme-glow: rgba(244, 63, 94, 0.16);
+      --theme-shadow: rgba(244, 63, 94, 0.22);
+      --theme-icon-shadow: rgba(225, 29, 72, 0.38);
+      --theme-border: rgba(244, 63, 94, 0.28);
+      --theme-border-hover: #f43f5e;
+      --theme-bg-soft: #fff1f2;
+      --theme-text-tag: #be123c;
+      --theme-btn-hover: #e11d48;
+    }
+
+    /* 6. Theme Blue: งานบริหารทั่วไป, อำนวยการ, ประชุม, นโยบาย */
+    .app-card.theme-blue {
+      --theme-color: #0284c7;
+      --theme-grad: linear-gradient(135deg, #0284c7 0%, #1e40af 100%);
+      --theme-glow: rgba(2, 132, 199, 0.16);
+      --theme-shadow: rgba(2, 132, 199, 0.22);
+      --theme-icon-shadow: rgba(2, 132, 199, 0.38);
+      --theme-border: rgba(2, 132, 199, 0.28);
+      --theme-border-hover: #0284c7;
+      --theme-bg-soft: #f0f9ff;
+      --theme-text-tag: #0369a1;
+      --theme-btn-hover: #0284c7;
+    }
+
+    /* Dark Mode Adjustments */
+    [data-theme="dark"] .app-card {
+      background: #0e1726;
+      border-color: #1e324f;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+    }
+    [data-theme="dark"] .app-card.theme-emerald { --theme-glow: rgba(16, 185, 129, 0.12); --theme-bg-soft: rgba(16, 185, 129, 0.16); --theme-text-tag: #34d399; }
+    [data-theme="dark"] .app-card.theme-amber { --theme-glow: rgba(245, 158, 11, 0.12); --theme-bg-soft: rgba(245, 158, 11, 0.16); --theme-text-tag: #fbbf24; }
+    [data-theme="dark"] .app-card.theme-purple { --theme-glow: rgba(139, 92, 246, 0.12); --theme-bg-soft: rgba(139, 92, 246, 0.16); --theme-text-tag: #a78bfa; }
+    [data-theme="dark"] .app-card.theme-cyan { --theme-glow: rgba(6, 182, 212, 0.12); --theme-bg-soft: rgba(6, 182, 212, 0.16); --theme-text-tag: #38bdf8; }
+    [data-theme="dark"] .app-card.theme-rose { --theme-glow: rgba(244, 63, 94, 0.12); --theme-bg-soft: rgba(244, 63, 94, 0.16); --theme-text-tag: #fb7185; }
+    [data-theme="dark"] .app-card.theme-blue { --theme-glow: rgba(2, 132, 199, 0.12); --theme-bg-soft: rgba(2, 132, 199, 0.16); --theme-text-tag: #38bdf8; }
+
     /* Apps Grid */
     .apps-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 22px;
     }
 
+    /* Main App Card Container */
     .app-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius-lg);
-      padding: 20px;
+      background: #ffffff;
+      border: 1.5px solid var(--theme-border, #bae6fd);
+      border-radius: 20px;
+      padding: 24px 22px 20px;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 15px;
       cursor: pointer;
-      transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+      transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.22s ease;
       position: relative;
-      box-shadow: var(--shadow-sm);
+      box-shadow: 0 4px 16px -2px rgba(2, 132, 199, 0.07), 0 1px 3px rgba(0, 0, 0, 0.04);
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    /* 1. Top Decorative Gradient Stripe (4.5px) */
+    .app-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4.5px;
+      background: var(--theme-grad, linear-gradient(90deg, #0284c7, #38bdf8));
+      transition: height 0.25s ease;
+      z-index: 2;
+    }
+
+    /* 2. Top-Right Ambient Radial Glow */
+    .app-card::after {
+      content: '';
+      position: absolute;
+      top: -30px;
+      right: -30px;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--theme-glow, rgba(2, 132, 199, 0.15)) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.65;
+      transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
     .app-card:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-md);
-      border-color: #0284c7;
-      background: var(--card-hover-bg);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 32px -8px var(--theme-shadow, rgba(2, 132, 199, 0.22)), 0 6px 16px -4px rgba(0, 0, 0, 0.06);
+      border-color: var(--theme-border-hover, #0284c7);
+    }
+
+    .app-card:hover::before {
+      height: 6px;
+    }
+
+    .app-card:hover::after {
+      opacity: 1;
+      transform: scale(1.15);
+    }
+
+    .app-card-header,
+    .app-card-body,
+    .app-card-footer {
+      position: relative;
+      z-index: 1;
     }
 
     .app-card-header {
@@ -1447,139 +1598,311 @@
       gap: 12px;
     }
 
+    /* Vibrant Gradient Icon Avatar (50x50px) */
     .app-card-icon-box {
-      width: 44px;
-      height: 44px;
-      min-width: 44px;
-      border-radius: var(--radius-md);
-      background: #e0f2fe;
-      color: #0284c7;
+      width: 50px;
+      height: 50px;
+      min-width: 50px;
+      border-radius: 15px;
+      background: var(--theme-grad, linear-gradient(135deg, #0284c7, #0369a1));
+      color: #ffffff;
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid #bae6fd;
+      box-shadow: 0 8px 18px -4px var(--theme-icon-shadow, rgba(2, 132, 199, 0.35));
+      border: 1.5px solid rgba(255, 255, 255, 0.45);
+      transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
-    [data-theme="dark"] .app-card-icon-box {
-      background: #152540;
-      color: #38bdf8;
-      border-color: #1e324f;
+    .app-card-icon-box i {
+      width: 24px;
+      height: 24px;
+      stroke-width: 2.2;
+    }
+
+    .app-card:hover .app-card-icon-box {
+      transform: scale(1.08) rotate(-3deg);
     }
 
     .app-card-badges {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
     }
 
     .app-card-badge {
-      font-size: 10.5px;
-      font-weight: 600;
-      padding: 2px 7px;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
       border-radius: var(--radius-full);
-      background: var(--bg-surface-elevated);
-      color: var(--text-secondary);
-      border: 1px solid var(--border-color);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      letter-spacing: 0.02em;
     }
 
-    .app-card-badge.highlight {
-      background: #e0f2fe;
+    .app-card-badge.badge-api {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .app-card-badge.badge-newtab {
+      background: rgba(2, 132, 199, 0.1);
       color: #0284c7;
-      border-color: #bae6fd;
+      border: 1px solid #bae6fd;
     }
 
-    [data-theme="dark"] .app-card-badge.highlight {
-      background: #152540;
-      color: #38bdf8;
-      border-color: #1e324f;
+    .app-card-badge.badge-custom {
+      background: var(--theme-grad, linear-gradient(135deg, #0284c7, #0369a1));
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.3);
     }
 
     .app-card-fav-btn {
-      background: transparent;
-      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--bg-surface-elevated, #f0f9ff);
+      border: 1px solid var(--border-color, #bae6fd);
       color: var(--text-muted);
       cursor: pointer;
-      padding: 4px;
-      border-radius: var(--radius-sm);
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: var(--transition-fast);
+      transition: all 0.2s ease;
     }
 
     .app-card-fav-btn:hover {
-      color: #fbbf24;
-      background: rgba(251, 191, 36, 0.1);
+      background: #fffbeb;
+      color: #f59e0b;
+      border-color: #fde68a;
+      transform: scale(1.12);
     }
 
     .app-card-fav-btn.active {
-      color: #fbbf24;
+      background: #fef3c7;
+      color: #d97706;
+      border-color: #f59e0b;
+      box-shadow: 0 2px 8px rgba(245, 158, 11, 0.25);
     }
 
     .app-card-body {
       flex: 1;
+      display: flex;
+      flex-direction: column;
     }
 
-    .app-card-category {
+    /* Category Pill Tag */
+    .app-card-category-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
       font-size: 11px;
-      font-weight: 600;
-      color: #0284c7;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      margin-bottom: 4px;
+      font-weight: 700;
+      color: var(--theme-text-tag, #0369a1);
+      background: var(--theme-bg-soft, #f0f9ff);
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      width: fit-content;
+      letter-spacing: 0.02em;
+      margin-bottom: 8px;
+    }
+
+    .app-card-category-tag::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--theme-color, #0284c7);
     }
 
     .app-card-title {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--text-primary);
+      font-size: 16.5px;
+      font-weight: 700;
+      color: #0f172a;
       margin-bottom: 6px;
       line-height: 1.35;
+      transition: color 0.2s ease;
+    }
+
+    [data-theme="dark"] .app-card-title {
+      color: #f8fafc;
+    }
+
+    .app-card:hover .app-card-title {
+      color: var(--theme-color, #0284c7);
     }
 
     .app-card-desc {
-      font-size: 12.5px;
-      color: var(--text-secondary);
-      line-height: 1.5;
+      font-size: 13px;
+      color: #475569;
+      line-height: 1.55;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
+      min-height: 40px;
+      margin-bottom: 4px;
     }
 
+    [data-theme="dark"] .app-card-desc {
+      color: #94a3b8;
+    }
+
+    /* Meta Chips */
+    .app-card-meta-chips {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: auto;
+      padding-top: 8px;
+      flex-wrap: wrap;
+    }
+
+    .app-meta-chip {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      background: var(--bg-surface-elevated, #f0f9ff);
+      padding: 2.5px 8px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4.5px;
+      border: 1px solid var(--border-color, #bae6fd);
+    }
+
+    /* Card Footer */
     .app-card-footer {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-top: 1px solid var(--border-subtle);
+      border-top: 1px solid rgba(224, 242, 254, 0.8);
       padding-top: 14px;
-      margin-top: 4px;
+      margin-top: 8px;
     }
 
-    .app-card-open-label {
-      font-size: 12.5px;
-      font-weight: 600;
-      color: #0284c7;
-      display: flex;
+    [data-theme="dark"] .app-card-footer {
+      border-top-color: #1e324f;
+    }
+
+    /* Interactive Themed Action Button */
+    .app-card-btn-action {
+      display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
+      font-size: 12.5px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      background: var(--theme-bg-soft, #f0f9ff);
+      color: var(--theme-color, #0284c7);
+      border: 1px solid transparent;
+      transition: all 0.22s ease;
+    }
+
+    .app-card:hover .app-card-btn-action {
+      background: var(--theme-grad, linear-gradient(135deg, #0284c7, #0369a1));
+      color: #ffffff;
+      box-shadow: 0 4px 12px var(--theme-glow, rgba(2, 132, 199, 0.25));
+    }
+
+    .app-card-btn-action i {
+      transition: transform 0.22s ease;
+    }
+
+    .app-card:hover .app-card-btn-action i {
+      transform: translateX(4px);
     }
 
     .app-card-ext-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
       background: transparent;
-      border: none;
+      border: 1px solid transparent;
       color: var(--text-muted);
       cursor: pointer;
-      padding: 4px;
-      border-radius: var(--radius-sm);
-      transition: var(--transition-fast);
       display: flex;
       align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
     }
 
     .app-card-ext-btn:hover {
-      color: var(--text-primary);
-      background: var(--bg-surface-elevated);
+      background: var(--theme-bg-soft, #f0f9ff);
+      color: var(--theme-color, #0284c7);
+      border-color: var(--theme-border, #bae6fd);
+      transform: scale(1.1);
+    }
+
+    /* Stat Badges with Distinct Colorful Theme Touches */
+    .stat-badge {
+      background: #ffffff;
+      border: 1.5px solid #bae6fd;
+      border-radius: 14px;
+      padding: 12px 18px;
+      min-width: 105px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.08);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .stat-badge:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(2, 132, 199, 0.15);
+    }
+    .stat-badge.stat-apps .stat-number { color: #0284c7; }
+    .stat-badge.stat-favs .stat-number { color: #d97706; }
+    .stat-badge.stat-cats .stat-number { color: #7c3aed; }
+    [data-theme="dark"] .stat-badge {
+      background: #111d33;
+      border-color: #1e324f;
+    }
+    [data-theme="dark"] .stat-badge.stat-apps .stat-number { color: #38bdf8; }
+    [data-theme="dark"] .stat-badge.stat-favs .stat-number { color: #fbbf24; }
+    [data-theme="dark"] .stat-badge.stat-cats .stat-number { color: #a78bfa; }
+
+    /* Category Section Headers with Gradient Accents */
+    .category-section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e0f2fe;
+    }
+    [data-theme="dark"] .category-section-header {
+      border-bottom-color: #1e324f;
+    }
+    .category-section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 16px;
+      font-weight: 800;
+      color: #0c4a6e;
+    }
+    [data-theme="dark"] .category-section-title {
+      color: #f8fafc;
+    }
+    .category-section-badge {
+      font-size: 12px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+      color: #0369a1;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      border: 1px solid #7dd3fc;
+    }
+    [data-theme="dark"] .category-section-badge {
+      background: #152540;
+      color: #38bdf8;
+      border-color: #1e3557;
     }
 
     /* Empty State */
@@ -2715,15 +3038,15 @@
               </div>
             </div>
             <div class="hero-stats">
-              <div class="stat-badge">
+              <div class="stat-badge stat-apps">
                 <div class="stat-number" id="stat-total-apps">5</div>
                 <div class="stat-label">ระบบพร้อมใช้</div>
               </div>
-              <div class="stat-badge">
+              <div class="stat-badge stat-favs">
                 <div class="stat-number" id="stat-fav-apps">0</div>
                 <div class="stat-label">รายการโปรด</div>
               </div>
-              <div class="stat-badge">
+              <div class="stat-badge stat-cats">
                 <div class="stat-number" id="stat-total-cats">4</div>
                 <div class="stat-label">หมวดหมู่</div>
               </div>
@@ -4655,6 +4978,121 @@ function getSuggestedIcon(name) {
       }
     }
 
+    function getAppTheme(app) {
+      const name = (app.name || '').toLowerCase();
+      const cat = (app.category || '').toLowerCase();
+      const desc = (app.description || '').toLowerCase();
+
+      if (name.includes('สุขภาพ') || name.includes('hdc') || name.includes('แพทย์') || name.includes('อนามัย') || name.includes('พยาบาล')) {
+        return 'theme-emerald';
+      }
+      if (name.includes('จัดซื้อ') || name.includes('จ้าง') || name.includes('ข่าว') || name.includes('ประกาศ') || name.includes('งบ') || name.includes('การเงิน') || name.includes('พัสดุ') || name.includes('ครุภัณฑ์')) {
+        return 'theme-amber';
+      }
+      if (name.includes('gis') || name.includes('แผนที่') || name.includes('เชิงพื้นที่') || name.includes('ดาวเทียม') || name.includes('พิกัด') || name.includes('สถิติ') || name.includes('วิเคราะห์')) {
+        return 'theme-purple';
+      }
+      if (name.includes('น้ำ') || name.includes('อุทก') || name.includes('เขื่อน') || name.includes('คลอง') || name.includes('ชลประทาน') || name.includes('อากาศ')) {
+        return 'theme-cyan';
+      }
+      if (name.includes('ร้องทุกข์') || name.includes('ร้องเรียน') || name.includes('ศูนย์ดำรงธรรม') || name.includes('สวัสดิการ') || name.includes('บุคคล') || name.includes('บุคลากร')) {
+        return 'theme-rose';
+      }
+      if (name.includes('ประชุม') || name.includes('สารบรรณ') || name.includes('เอกสาร') || name.includes('อำนวยการ') || name.includes('บริหารทั่วไป') || name.includes('ยานพาหนะ')) {
+        return 'theme-blue';
+      }
+
+      // Deterministic fallback based on app id
+      const themes = ['theme-blue', 'theme-emerald', 'theme-amber', 'theme-purple', 'theme-cyan', 'theme-rose'];
+      let hash = 0;
+      for (let i = 0; i < (app.id || '').length; i++) {
+        hash = (hash * 31 + (app.id || '').charCodeAt(i)) % themes.length;
+      }
+      return themes[hash];
+    }
+
+    function createAppCardElement(app) {
+      const isFav = favorites.includes(app.id);
+      const theme = getAppTheme(app);
+      const card = document.createElement('div');
+      card.className = `app-card ${theme}`;
+      card.onclick = () => {
+        if (app.openMode === 'newtab') {
+          window.open(app.url, '_blank');
+        } else {
+          window.location.hash = `#/app/${app.id}`;
+        }
+      };
+
+      // Badge logic
+      let badgeHtml = '';
+      if (app.openMode === 'api_viewer') {
+        badgeHtml = `<span class="app-card-badge badge-api"><i data-lucide="zap" style="width: 12px; height: 12px;"></i> API สด</span>`;
+      } else if (app.badge) {
+        badgeHtml = `<span class="app-card-badge badge-custom">${app.badge}</span>`;
+      } else if (app.openMode === 'newtab') {
+        badgeHtml = `<span class="app-card-badge badge-newtab">เปิดแท็บใหม่</span>`;
+      }
+
+      // Mode label & icon
+      let openLabel = 'เข้าใช้งานระบบ';
+      let openIcon = 'arrow-right';
+      let quickActionIcon = 'external-link';
+      let quickActionTitle = 'เปิดในแท็บใหม่';
+
+      if (app.openMode === 'newtab') {
+        openLabel = 'เปิดแท็บใหม่';
+        openIcon = 'external-link';
+      } else if (app.openMode === 'api_viewer') {
+        openLabel = 'ดูรายงาน API สด';
+        openIcon = 'activity';
+        quickActionIcon = 'database';
+        quickActionTitle = 'เปิดแดชบอร์ด API HDC';
+      }
+
+      const modeChip = app.openMode === 'api_viewer' 
+        ? '<span class="app-meta-chip"><i data-lucide="cpu" style="width: 11px; height: 11px; color: #10b981;"></i> Open Data API</span>'
+        : (app.openMode === 'newtab'
+            ? '<span class="app-meta-chip"><i data-lucide="external-link" style="width: 11px; height: 11px; color: #0284c7;"></i> ลิงก์ภายนอก</span>'
+            : '<span class="app-meta-chip"><i data-lucide="layout-grid" style="width: 11px; height: 11px; color: #0369a1;"></i> พอร์ทัล อบจ.</span>');
+
+      card.innerHTML = `
+        <div class="app-card-header">
+          <div class="app-card-icon-box">
+            <i data-lucide="${getAppIcon(app)}"></i>
+          </div>
+          <div class="app-card-badges">
+            ${badgeHtml}
+            <button class="app-card-fav-btn ${isFav ? 'active' : ''}" onclick="toggleFavorite('${app.id}', event)" title="ติดดาวรายการโปรด">
+              <i data-lucide="star" style="width: 16px; height: 16px; ${isFav ? 'fill: currentColor;' : ''}"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="app-card-body">
+          <div class="app-card-category-tag">${app.category || 'บริการประชาชน'}</div>
+          <h3 class="app-card-title">${app.name}</h3>
+          <p class="app-card-desc">${app.description || 'คลิกเพื่อเปิดใช้งานระบบงานและเข้าถึงข้อมูลผ่าน Smart loppao'}</p>
+          <div class="app-card-meta-chips">
+            ${modeChip}
+            <span class="app-meta-chip"><i data-lucide="shield-check" style="width: 11px; height: 11px; color: #10b981;"></i> พร้อมใช้งาน</span>
+          </div>
+        </div>
+
+        <div class="app-card-footer">
+          <div class="app-card-btn-action">
+            <span>${openLabel}</span>
+            <i data-lucide="${openIcon}" style="width: 14px; height: 14px;"></i>
+          </div>
+          <button class="app-card-ext-btn" title="${quickActionTitle}" onclick="event.stopPropagation(); ${app.openMode === 'api_viewer' ? `window.location.hash = '#/app/${app.id}';` : `window.open('${app.url}', '_blank');`}">
+            <i data-lucide="${quickActionIcon}" style="width: 15px; height: 15px;"></i>
+          </button>
+        </div>
+      `;
+
+      return card;
+    }
+
     function renderDashboard() {
       const grid = document.getElementById('dashboard-apps-grid');
       const pillsContainer = document.getElementById('dashboard-category-pills');
@@ -4666,11 +5104,10 @@ function getSuggestedIcon(name) {
       const isStaff = isStaffLoggedIn();
       const allCategories = new Set(audienceApps.map(a => a.category || 'ทั่วไป'));
       
-      let pillsHtml = `<button class="pill-btn ${activeCategoryFilter === 'all' ? 'active' : ''}" onclick="setCategoryFilter('all')">ทั้งหมด</button>`;
+      let pillsHtml = `<button class="pill-btn ${activeCategoryFilter === 'all' ? 'active' : ''}" onclick="setCategoryFilter('all')"><i data-lucide="layout-grid" style="width: 13px; height: 13px;"></i> ทั้งหมด</button>`;
       allCategories.forEach(cat => {
         pillsHtml += `<button class="pill-btn ${activeCategoryFilter === cat ? 'active' : ''}" onclick="setCategoryFilter('${cat}')">${cat}</button>`;
       });
-// Staff login button removed from pills for clean category navigation
       pillsContainer.innerHTML = pillsHtml;
 
       const visibleApps = audienceApps;
@@ -4713,63 +5150,24 @@ function getSuggestedIcon(name) {
           const groupWrapper = document.createElement('div');
           groupWrapper.className = 'dashboard-category-group';
           groupWrapper.style.gridColumn = '1 / -1';
-          groupWrapper.style.marginBottom = '28px';
+          groupWrapper.style.marginBottom = '32px';
 
           groupWrapper.innerHTML = `
-            <div class="category-section-header" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1.5px solid var(--border-color);">
-              <div class="category-section-title" style="display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 700; color: var(--text-main);">
-                <i data-lucide="folder" style="width: 18px; height: 18px; color: var(--primary-color);"></i>
+            <div class="category-section-header">
+              <div class="category-section-title">
+                <i data-lucide="folder" style="width: 20px; height: 20px; color: #0284c7;"></i>
                 <span>${catName}</span>
               </div>
-              <span class="category-section-badge" style="font-size: 12px; font-weight: 600; background: rgba(2, 132, 199, 0.1); color: var(--primary-color); padding: 3px 10px; border-radius: 9999px;">
+              <span class="category-section-badge">
                 ${appsInCat.length} ระบบ
               </span>
             </div>
-            <div class="apps-grid apps-subgrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 20px; padding: 0;"></div>
+            <div class="apps-grid apps-subgrid"></div>
           `;
 
           const subGrid = groupWrapper.querySelector('.apps-subgrid');
           appsInCat.forEach(app => {
-            const isFav = favorites.includes(app.id);
-            const card = document.createElement('div');
-            card.className = 'app-card';
-            card.onclick = () => {
-              if (app.openMode === 'newtab') {
-                window.open(app.url, '_blank');
-              } else {
-                window.location.hash = `#/app/${app.id}`;
-              }
-            };
-            card.innerHTML = `
-              <div class="app-card-header">
-                <div class="app-card-icon-box">
-                  <i data-lucide="${getAppIcon(app)}"></i>
-                </div>
-                <div class="app-card-badges">
-                  ${app.badge ? `<span class="app-card-badge highlight">${app.badge}</span>` : ''}
-                  <button class="app-card-fav-btn ${isFav ? 'active' : ''}" onclick="toggleFavorite('${app.id}', event)" title="ติดดาว">
-                    <i data-lucide="star" style="width: 16px; height: 16px;"></i>
-                  </button>
-                </div>
-              </div>
-
-              <div class="app-card-body">
-                <div class="app-card-category">${app.category}</div>
-                <h3 class="app-card-title">${app.name}</h3>
-                <p class="app-card-desc">${app.description || 'คลิกเพื่อเปิดใช้งานระบบงานผ่าน Smart loppao'}</p>
-              </div>
-
-              <div class="app-card-footer">
-                <div class="app-card-open-label">
-                  <span>${app.openMode === 'newtab' ? 'เปิดแท็บใหม่' : (app.openMode === 'api_viewer' ? 'ดูข้อมูล API สด' : 'เข้าใช้งานระบบ')}</span>
-                  <i data-lucide="${app.openMode === 'newtab' ? 'external-link' : (app.openMode === 'api_viewer' ? 'activity' : 'arrow-right')}" style="width: 14px; height: 14px;"></i>
-                </div>
-                <button class="app-card-ext-btn" title="${app.openMode === 'api_viewer' ? 'เปิดดูข้อมูล API' : (app.openMode === 'newtab' ? 'เปิดในแท็บใหม่' : 'เปิดในแท็บใหม่')}" onclick="event.stopPropagation(); ${app.openMode === 'api_viewer' ? `window.location.hash = '#/app/${app.id}';` : `window.open('${app.url}', '_blank');`}">
-                  <i data-lucide="${app.openMode === 'api_viewer' ? 'database' : 'external-link'}" style="width: 15px; height: 15px;"></i>
-                </button>
-              </div>
-            `;
-            subGrid.appendChild(card);
+            subGrid.appendChild(createAppCardElement(app));
           });
 
           grid.appendChild(groupWrapper);
@@ -4777,48 +5175,7 @@ function getSuggestedIcon(name) {
       } else {
         // เมื่อกรองเฉพาะหมวด หรือเฉพาะรายการโปรด ให้แสดงการ์ดตรงๆ
         filtered.forEach(app => {
-          const isFav = favorites.includes(app.id);
-          const card = document.createElement('div');
-          card.className = 'app-card';
-          card.onclick = () => {
-            if (app.openMode === 'newtab') {
-              window.open(app.url, '_blank');
-            } else {
-              window.location.hash = `#/app/${app.id}`;
-            }
-          };
-
-          card.innerHTML = `
-            <div class="app-card-header">
-              <div class="app-card-icon-box">
-                <i data-lucide="${getAppIcon(app)}"></i>
-              </div>
-              <div class="app-card-badges">
-                ${app.badge ? `<span class="app-card-badge highlight">${app.badge}</span>` : ''}
-                <button class="app-card-fav-btn ${isFav ? 'active' : ''}" onclick="toggleFavorite('${app.id}', event)" title="ติดดาว">
-                  <i data-lucide="star" style="width: 16px; height: 16px;"></i>
-                </button>
-              </div>
-            </div>
-
-            <div class="app-card-body">
-              <div class="app-card-category">${app.category}</div>
-              <h3 class="app-card-title">${app.name}</h3>
-              <p class="app-card-desc">${app.description || 'คลิกเพื่อเปิดใช้งานระบบงานผ่าน Smart loppao'}</p>
-            </div>
-
-            <div class="app-card-footer">
-              <div class="app-card-open-label">
-                <span>${app.openMode === 'newtab' ? 'เปิดแท็บใหม่' : 'เข้าใช้งานระบบ'}</span>
-                <i data-lucide="${app.openMode === 'newtab' ? 'external-link' : 'arrow-right'}" style="width: 14px; height: 14px;"></i>
-              </div>
-              <button class="app-card-ext-btn" title="เปิดในแท็บใหม่" onclick="event.stopPropagation(); window.open('${app.url}', '_blank');">
-                <i data-lucide="external-link" style="width: 15px; height: 15px;"></i>
-              </button>
-            </div>
-          `;
-
-          grid.appendChild(card);
+          grid.appendChild(createAppCardElement(app));
         });
       }
 
