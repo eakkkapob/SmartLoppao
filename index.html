@@ -3,10 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(self), payment=(), usb=()">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://script.google.com https://*.googleusercontent.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; frame-src 'self' https: http: data:; connect-src 'self' https:; object-src 'none'; base-uri 'self';">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <title>Smart loppao | ศูนย์รวมระบบงานและแอปพลิเคชัน องค์การบริหารส่วนจังหวัดลพบุรี</title>
+
+  <!-- ================================================================= -->
+  <!-- 0. SMART CLICKJACKING GUARD (อนุญาตเฉพาะ GAS / เว็บราชการ / เจ้าของ) -->
+  <!-- ================================================================= -->
+  <script>
+    (function() {
+      try {
+        if (window.top !== window.self && document.referrer) {
+          var refHost = new URL(document.referrer).hostname.toLowerCase();
+          var allowedDomains = [
+            'google.com', 'googleusercontent.com', 'loppao.go.th',
+            'github.io', 'localhost', '127.0.0.1'
+          ];
+          var isTrusted = allowedDomains.some(function(d) {
+            return refHost === d || refHost.endsWith('.' + d) || refHost.endsWith('.go.th');
+          });
+          if (!isTrusted) {
+            console.warn('[Security] Blocked untrusted framing from:', refHost);
+            window.top.location = window.self.location.href;
+          }
+        }
+      } catch (e) {}
+    })();
+  </script>
 
   <!-- ================================================================= -->
   <!-- 1. GOOGLE FONTS: Inter + IBM Plex Sans Thai (ภาษาไทยคมชัด)        -->
@@ -16,9 +44,9 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- ================================================================= -->
-  <!-- 2. ICON LIBRARY: Lucide Icons CDN                                -->
+  <!-- 2. ICON LIBRARY: Lucide Icons CDN (Pinned Version + CORS Safe)   -->
   <!-- ================================================================= -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <style>
     /* ================================================================= */
@@ -3669,7 +3697,11 @@ function sendToPortal(action, payload) {
               </button>
             </div>
           </div>
-          <div id="staff-auth-error-msg" style="color: #ef4444; font-size: 12.5px; display: none; margin-top: 4px; align-items: center; gap: 4px;">
+          <div style="display: flex; align-items: center; gap: 8px; margin-top: 10px;">
+            <input type="checkbox" id="chk-remember-staff" checked style="width: 16px; height: 16px; accent-color: var(--accent); cursor: pointer;">
+            <label for="chk-remember-staff" style="font-size: 13px; color: var(--text-secondary); cursor: pointer; user-select: none;">จดจำการเข้าสู่ระบบในอุปกรณ์นี้</label>
+          </div>
+          <div id="staff-auth-error-msg" style="color: #ef4444; font-size: 12.5px; display: none; margin-top: 6px; align-items: center; gap: 4px;">
             <i data-lucide="alert-circle" style="width: 14px; height: 14px;"></i>
             <span>รหัสผ่านเจ้าหน้าที่ไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง</span>
           </div>
@@ -3706,7 +3738,11 @@ function sendToPortal(action, payload) {
             <label class="form-label" for="input-admin-pass">รหัสผ่าน Admin</label>
             <input type="password" id="input-admin-pass" class="form-input" placeholder="กรอกรหัสผ่าน..." required autofocus>
           </div>
-          <div id="auth-error-msg" style="color: #ef4444; font-size: 12px; display: none;">รหัสผ่านไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง</div>
+          <div style="display: flex; align-items: center; gap: 8px; margin-top: 10px;">
+            <input type="checkbox" id="chk-remember-admin" checked style="width: 16px; height: 16px; accent-color: var(--accent); cursor: pointer;">
+            <label for="chk-remember-admin" style="font-size: 13px; color: var(--text-secondary); cursor: pointer; user-select: none;">จดจำการเข้าสู่ระบบผู้ดูแลระบบในอุปกรณ์นี้</label>
+          </div>
+          <div id="auth-error-msg" style="color: #ef4444; font-size: 12px; display: none; margin-top: 6px;">รหัสผ่านไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง</div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" id="btn-cancel-auth">ยกเลิก</button>
@@ -3856,7 +3892,7 @@ function sendToPortal(action, payload) {
         <button class="modal-close-btn" id="btn-close-test-modal" aria-label="ปิด"><i data-lucide="x"></i></button>
       </div>
       <div class="modal-body" style="padding: 0; position: relative; flex: 1; overflow: hidden;">
-        <iframe id="test-preview-iframe" style="width: 100%; height: 100%; border: none; background: white;" allow="clipboard-write; fullscreen"></iframe>
+        <iframe id="test-preview-iframe" style="width: 100%; height: 100%; border: none; background: white;" allow="clipboard-write; fullscreen" referrerpolicy="strict-origin-when-cross-origin"></iframe>
         <div id="test-preview-api-box" style="display: none; width: 100%; height: 100%; overflow: auto; background: var(--bg-surface);"></div>
       </div>
       <div class="modal-footer" style="justify-content: space-between;">
@@ -4505,7 +4541,7 @@ function getSuggestedIcon(name) {
 
       // โหมด 2: เปิดแท็บใหม่
       if (app.openMode === 'newtab') {
-        window.open(app.url, '_blank');
+        window.open(app.url, '_blank', 'noopener,noreferrer');
         window.location.hash = '#/home';
         return;
       }
@@ -4547,7 +4583,7 @@ function getSuggestedIcon(name) {
     }
 
     function navigateToAdmin() {
-      const isAuthed = sessionStorage.getItem('portal_admin_session') === 'true';
+      const isAuthed = isAdminLoggedIn();
       if (!isAuthed) {
         openAdminAuthModal();
         return;
@@ -4632,6 +4668,7 @@ function getSuggestedIcon(name) {
       iframe.id = `iframe-${app.id}`;
       iframe.title = app.name;
       iframe.setAttribute('allow', 'clipboard-write; fullscreen');
+      iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
       iframe.setAttribute('loading', 'lazy');
 
       const finalUrl = getResolvedAppUrl(app);
@@ -4759,8 +4796,33 @@ function getSuggestedIcon(name) {
     const DEFAULT_STAFF_HASH = "8bccc8ba66137310285e4f297ab601fd3912e85849841caffb0aad20ac6f0d78"; // Loppao@1234
     const DEFAULT_ADMIN_HASH = "ef5e0022b11531fcd539cba1186cbfd272cb4903139b812db753a9a61c1d91ac"; // Loppao@111028
 
+    function isAdminLoggedIn() {
+      if (sessionStorage.getItem('portal_admin_session') === 'true') return true;
+      if (localStorage.getItem('portal_admin_session') === 'true') {
+        const savedHash = localStorage.getItem('portal_admin_auth_hash');
+        const validAdminHash = appConfig?.adminPasswordHash || DEFAULT_ADMIN_HASH;
+        if (!savedHash || savedHash === validAdminHash || savedHash === DEFAULT_ADMIN_HASH) {
+          sessionStorage.setItem('portal_admin_session', 'true');
+          sessionStorage.setItem('portal_user_role', 'staff');
+          return true;
+        }
+      }
+      return false;
+    }
+
     function isStaffLoggedIn() {
-      return sessionStorage.getItem('portal_user_role') === 'staff' || sessionStorage.getItem('portal_admin_session') === 'true';
+      if (isAdminLoggedIn()) return true;
+      if (sessionStorage.getItem('portal_user_role') === 'staff') return true;
+      if (localStorage.getItem('portal_user_role') === 'staff') {
+        const savedHash = localStorage.getItem('portal_staff_auth_hash');
+        const validStaffHash = appConfig?.staffPasswordHash || DEFAULT_STAFF_HASH;
+        const validAdminHash = appConfig?.adminPasswordHash || DEFAULT_ADMIN_HASH;
+        if (!savedHash || savedHash === validStaffHash || savedHash === validAdminHash || savedHash === DEFAULT_STAFF_HASH || savedHash === DEFAULT_ADMIN_HASH) {
+          sessionStorage.setItem('portal_user_role', 'staff');
+          return true;
+        }
+      }
+      return false;
     }
 
     function getAudienceApps() {
@@ -4827,12 +4889,20 @@ function getSuggestedIcon(name) {
       const validAdminHash = appConfig.adminPasswordHash || DEFAULT_ADMIN_HASH;
 
       if (hash === validStaffHash || hash === validAdminHash) {
+        const rememberStaff = document.getElementById('chk-remember-staff')?.checked !== false;
         sessionStorage.setItem('portal_user_role', 'staff');
+        if (rememberStaff) {
+          localStorage.setItem('portal_user_role', 'staff');
+          localStorage.setItem('portal_staff_auth_hash', hash);
+        } else {
+          localStorage.removeItem('portal_user_role');
+          localStorage.removeItem('portal_staff_auth_hash');
+        }
         closeStaffAuthModal();
         updateAudienceUI();
         renderSidebar();
         renderDashboard();
-        showToast('เข้าสู่ระบบสำหรับเจ้าหน้าที่สำเร็จ ปลดล็อกระบบงานทั้งหมดแล้ว', 'success');
+        showToast(rememberStaff ? 'เข้าสู่ระบบเจ้าหน้าที่สำเร็จ (จดจำการเข้าสู่ระบบในอุปกรณ์นี้แล้ว)' : 'เข้าสู่ระบบสำหรับเจ้าหน้าที่สำเร็จ ปลดล็อกระบบงานทั้งหมดแล้ว', 'success');
       } else {
         const err = document.getElementById('staff-auth-error-msg');
         if (err) {
@@ -4847,7 +4917,9 @@ function getSuggestedIcon(name) {
       sessionStorage.removeItem('portal_user_role');
       sessionStorage.removeItem('portal_admin_session');
       localStorage.removeItem('portal_user_role');
+      localStorage.removeItem('portal_staff_auth_hash');
       localStorage.removeItem('portal_admin_session');
+      localStorage.removeItem('portal_admin_auth_hash');
 
       activeCategoryFilter = 'all';
       filterFavoritesOnly = false;
@@ -5018,7 +5090,7 @@ function getSuggestedIcon(name) {
       card.className = `app-card ${theme}`;
       card.onclick = () => {
         if (app.openMode === 'newtab') {
-          window.open(app.url, '_blank');
+          window.open(app.url, '_blank', 'noopener,noreferrer');
         } else {
           window.location.hash = `#/app/${app.id}`;
         }
@@ -5084,7 +5156,7 @@ function getSuggestedIcon(name) {
             <span>${openLabel}</span>
             <i data-lucide="${openIcon}" style="width: 14px; height: 14px;"></i>
           </div>
-          <button class="app-card-ext-btn" title="${quickActionTitle}" onclick="event.stopPropagation(); ${app.openMode === 'api_viewer' ? `window.location.hash = '#/app/${app.id}';` : `window.open('${app.url}', '_blank');`}">
+          <button class="app-card-ext-btn" title="${quickActionTitle}" onclick="event.stopPropagation(); ${app.openMode === 'api_viewer' ? `window.location.hash = '#/app/${app.id}';` : `window.open('${app.url}', '_blank', 'noopener,noreferrer');`}">
             <i data-lucide="${quickActionIcon}" style="width: 15px; height: 15px;"></i>
           </button>
         </div>
@@ -5215,12 +5287,22 @@ function getSuggestedIcon(name) {
       const hash = await sha256(pass);
 
       if (hash === appConfig.adminPasswordHash || hash === DEFAULT_CONFIG.adminPasswordHash) {
+        const rememberAdmin = document.getElementById('chk-remember-admin')?.checked !== false;
         appConfig.adminPasswordHash = DEFAULT_CONFIG.adminPasswordHash;
         saveConfig();
         sessionStorage.setItem('portal_admin_session', 'true');
         sessionStorage.setItem('portal_user_role', 'staff');
+        if (rememberAdmin) {
+          localStorage.setItem('portal_admin_session', 'true');
+          localStorage.setItem('portal_admin_auth_hash', hash);
+          localStorage.setItem('portal_user_role', 'staff');
+          localStorage.setItem('portal_staff_auth_hash', hash);
+        } else {
+          localStorage.removeItem('portal_admin_session');
+          localStorage.removeItem('portal_admin_auth_hash');
+        }
         document.getElementById('modal-admin-auth').classList.remove('active');
-        showToast("เข้าสู่ระบบผู้ดูแลระบบสำเร็จ (Loppao@111028)", "success");
+        showToast(rememberAdmin ? "เข้าสู่ระบบผู้ดูแลระบบสำเร็จ (จดจำการเข้าสู่ระบบแล้ว)" : "เข้าสู่ระบบผู้ดูแลระบบสำเร็จ (Loppao@111028)", "success");
         updateAudienceUI();
         navigateToAdmin();
       } else {
@@ -5232,7 +5314,9 @@ function getSuggestedIcon(name) {
       sessionStorage.removeItem('portal_admin_session');
       sessionStorage.removeItem('portal_user_role');
       localStorage.removeItem('portal_admin_session');
+      localStorage.removeItem('portal_admin_auth_hash');
       localStorage.removeItem('portal_user_role');
+      localStorage.removeItem('portal_staff_auth_hash');
 
       activeCategoryFilter = 'all';
       filterFavoritesOnly = false;
@@ -6002,9 +6086,9 @@ function getSuggestedIcon(name) {
       document.getElementById('btn-open-newtab')?.addEventListener('click', () => {
         if ((currentRoute.view === 'app' || currentRoute.view === 'api') && currentRoute.id) {
           const app = appConfig.apps.find(a => a.id === currentRoute.id);
-          if (app) window.open(app.url, '_blank');
+          if (app) window.open(app.url, '_blank', 'noopener,noreferrer');
         } else {
-          window.open(window.location.href, '_blank');
+          window.open(window.location.href, '_blank', 'noopener,noreferrer');
         }
       });
 
@@ -6020,7 +6104,7 @@ function getSuggestedIcon(name) {
       document.getElementById('btn-error-open-newtab')?.addEventListener('click', () => {
         if (currentRoute.id) {
           const app = appConfig.apps.find(a => a.id === currentRoute.id);
-          if (app) window.open(app.url, '_blank');
+          if (app) window.open(app.url, '_blank', 'noopener,noreferrer');
         }
       });
 
